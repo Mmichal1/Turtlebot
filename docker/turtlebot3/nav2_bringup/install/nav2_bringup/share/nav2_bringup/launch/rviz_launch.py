@@ -1,1 +1,0 @@
-/home/ros/turtlebot3/nav2_bringup/launch/rviz_launch.py

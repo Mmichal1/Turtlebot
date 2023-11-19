@@ -1,1 +1,0 @@
-/home/ros/turtlebot3/turtlebot3-2.1.5/build/turtlebot3/ament_cmake_core/turtlebot3Config.cmake
