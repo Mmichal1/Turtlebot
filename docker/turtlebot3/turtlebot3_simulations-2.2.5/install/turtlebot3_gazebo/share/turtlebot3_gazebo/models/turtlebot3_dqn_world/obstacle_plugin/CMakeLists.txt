@@ -1,1 +1,0 @@
-/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/turtlebot3_gazebo/models/turtlebot3_dqn_world/obstacle_plugin/CMakeLists.txt
