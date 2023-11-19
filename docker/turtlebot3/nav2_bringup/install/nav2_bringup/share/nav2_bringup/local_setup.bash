@@ -1,0 +1,1 @@
+/home/ros/turtlebot3/nav2_bringup/build/nav2_bringup/ament_cmake_environment_hooks/local_setup.bash
