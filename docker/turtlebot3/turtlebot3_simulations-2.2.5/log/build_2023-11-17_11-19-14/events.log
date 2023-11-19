@@ -1,0 +1,145 @@
+[0.000000] (-) TimerEvent: {}
+[0.000263] (turtlebot3_fake_node) JobQueued: {'identifier': 'turtlebot3_fake_node', 'dependencies': OrderedDict()}
+[0.000349] (turtlebot3_gazebo) JobQueued: {'identifier': 'turtlebot3_gazebo', 'dependencies': OrderedDict()}
+[0.000413] (turtlebot3_simulations) JobQueued: {'identifier': 'turtlebot3_simulations', 'dependencies': OrderedDict([('turtlebot3_fake_node', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node'), ('turtlebot3_gazebo', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo')])}
+[0.000498] (turtlebot3_fake_node) JobStarted: {'identifier': 'turtlebot3_fake_node'}
+[0.091316] (turtlebot3_gazebo) JobStarted: {'identifier': 'turtlebot3_gazebo'}
+[0.099231] (-) TimerEvent: {}
+[0.179356] (turtlebot3_fake_node) JobProgress: {'identifier': 'turtlebot3_fake_node', 'progress': 'cmake'}
+[0.180442] (turtlebot3_fake_node) JobProgress: {'identifier': 'turtlebot3_fake_node', 'progress': 'build'}
+[0.181131] (turtlebot3_fake_node) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/build/turtlebot3_fake_node', '--', '-j8', '-l8'], 'cwd': '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/build/turtlebot3_fake_node', 'env': OrderedDict([('HOSTNAME', 'envy-13'), ('IGNITION_VERSION', 'fortress'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/lib:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ros'), ('OLDPWD', '/home/ros'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3-2.1.5/install:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install:/home/ros/turtlebot3/DynamixelSDK/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('RUNLEVEL', '3'), ('XDG_RUNTIME_DIR', '/tmp/runtime-ros'), ('DISPLAY', 'unix:0'), ('LANG', 'C.UTF-8'), ('AMENT_PREFIX_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/opt/ros/humble'), ('PWD', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/build/turtlebot3_fake_node'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/opt/ros/humble')]), 'shell': False}
+[0.184505] (turtlebot3_gazebo) JobProgress: {'identifier': 'turtlebot3_gazebo', 'progress': 'cmake'}
+[0.185989] (turtlebot3_gazebo) JobProgress: {'identifier': 'turtlebot3_gazebo', 'progress': 'build'}
+[0.186352] (turtlebot3_gazebo) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/build/turtlebot3_gazebo', '--', '-j8', '-l8'], 'cwd': '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/build/turtlebot3_gazebo', 'env': OrderedDict([('HOSTNAME', 'envy-13'), ('IGNITION_VERSION', 'fortress'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/lib:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ros'), ('OLDPWD', '/home/ros'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3-2.1.5/install:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install:/home/ros/turtlebot3/DynamixelSDK/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('RUNLEVEL', '3'), ('XDG_RUNTIME_DIR', '/tmp/runtime-ros'), ('DISPLAY', 'unix:0'), ('LANG', 'C.UTF-8'), ('AMENT_PREFIX_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/opt/ros/humble'), ('PWD', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/build/turtlebot3_gazebo'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/opt/ros/humble')]), 'shell': False}
+[0.199362] (-) TimerEvent: {}
+[0.299658] (-) TimerEvent: {}
+[0.328343] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.5 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.367811] (turtlebot3_fake_node) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target turtlebot3_fake_node\x1b[0m\n'}
+[0.399751] (-) TimerEvent: {}
+[0.469842] (turtlebot3_fake_node) StdoutLine: {'line': b'[100%] Built target turtlebot3_fake_node\n'}
+[0.480520] (turtlebot3_fake_node) CommandEnded: {'returncode': 0}
+[0.489269] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[0.499903] (-) TimerEvent: {}
+[0.503543] (turtlebot3_fake_node) JobProgress: {'identifier': 'turtlebot3_fake_node', 'progress': 'install'}
+[0.511393] (turtlebot3_fake_node) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/build/turtlebot3_fake_node'], 'cwd': '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/build/turtlebot3_fake_node', 'env': OrderedDict([('HOSTNAME', 'envy-13'), ('IGNITION_VERSION', 'fortress'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/lib:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ros'), ('OLDPWD', '/home/ros'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3-2.1.5/install:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install:/home/ros/turtlebot3/DynamixelSDK/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('RUNLEVEL', '3'), ('XDG_RUNTIME_DIR', '/tmp/runtime-ros'), ('DISPLAY', 'unix:0'), ('LANG', 'C.UTF-8'), ('AMENT_PREFIX_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/opt/ros/humble'), ('PWD', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/build/turtlebot3_fake_node'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/opt/ros/humble')]), 'shell': False}
+[0.517371] (turtlebot3_gazebo) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake:438 (message):\n'}
+[0.517623] (turtlebot3_gazebo) StderrLine: {'line': b'  The package name passed to `find_package_handle_standard_args` (PkgConfig)\n'}
+[0.517734] (turtlebot3_gazebo) StderrLine: {'line': b'  does not match the name of the calling package (gazebo).  This can lead to\n'}
+[0.517796] (turtlebot3_gazebo) StderrLine: {'line': b'  problems in calling code that expects `find_package` result variables\n'}
+[0.517851] (turtlebot3_gazebo) StderrLine: {'line': b'  (e.g., `_FOUND`) to follow a certain pattern.\n'}
+[0.517933] (turtlebot3_gazebo) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[0.518022] (turtlebot3_gazebo) StderrLine: {'line': b'  /usr/share/cmake-3.22/Modules/FindPkgConfig.cmake:99 (find_package_handle_standard_args)\n'}
+[0.518113] (turtlebot3_gazebo) StderrLine: {'line': b'  /usr/lib/x86_64-linux-gnu/cmake/gazebo/gazebo-config.cmake:72 (include)\n'}
+[0.518211] (turtlebot3_gazebo) StderrLine: {'line': b'  CMakeLists.txt:23 (find_package)\n'}
+[0.518302] (turtlebot3_gazebo) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[0.518358] (turtlebot3_gazebo) StderrLine: {'line': b'\x1b[0m\n'}
+[0.518641] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[0.519218] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[0.519599] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/lib/turtlebot3_fake_node/turtlebot3_fake_node\n'}
+[0.519907] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/launch/rviz2.launch.py\n'}
+[0.520009] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/launch/turtlebot3_fake_node.launch.py\n'}
+[0.520188] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/param/burger.yaml\n'}
+[0.520288] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/param/waffle.yaml\n'}
+[0.520393] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/param/waffle_pi.yaml\n'}
+[0.520651] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/include//turtlebot3_fake_node/turtlebot3_fake_node.hpp\n'}
+[0.520936] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/ament_index/resource_index/package_run_dependencies/turtlebot3_fake_node\n'}
+[0.521111] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/ament_index/resource_index/parent_prefix_path/turtlebot3_fake_node\n'}
+[0.521271] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/environment/ament_prefix_path.sh\n'}
+[0.521424] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/environment/ament_prefix_path.dsv\n'}
+[0.521542] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/environment/path.sh\n'}
+[0.521703] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/environment/path.dsv\n'}
+[0.521856] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/local_setup.bash\n'}
+[0.522012] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/local_setup.sh\n'}
+[0.522159] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/local_setup.zsh\n'}
+[0.522307] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/local_setup.dsv\n'}
+[0.522450] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/package.dsv\n'}
+[0.531036] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/ament_index/resource_index/packages/turtlebot3_fake_node\n'}
+[0.531287] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[0.531360] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[0.531439] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/cmake/turtlebot3_fake_nodeConfig.cmake\n'}
+[0.531513] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/cmake/turtlebot3_fake_nodeConfig-version.cmake\n'}
+[0.531609] (turtlebot3_fake_node) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node/share/turtlebot3_fake_node/package.xml\n'}
+[0.533669] (turtlebot3_fake_node) CommandEnded: {'returncode': 0}
+[0.582579] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found DART: /usr/include (Required is at least version "6.6") found components: dart \n'}
+[0.600081] (-) TimerEvent: {}
+[0.649515] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "3.12.4") \n'}
+[0.654162] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.15.0\n'}
+[0.668036] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of ignition-math6\n'}
+[0.675608] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for OGRE...\n'}
+[0.679294] (turtlebot3_fake_node) JobEnded: {'identifier': 'turtlebot3_fake_node', 'rc': 0}
+[0.683067] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found Ogre Ghadamon (1.9.0)\n'}
+[0.683415] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found OGRE: optimized;/usr/lib/x86_64-linux-gnu/libOgreMain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreMain.so\n'}
+[0.693252] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for OGRE_Paging...\n'}
+[0.693542] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found OGRE_Paging: optimized;/usr/lib/x86_64-linux-gnu/libOgrePaging.so;debug;/usr/lib/x86_64-linux-gnu/libOgrePaging.so\n'}
+[0.693712] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for OGRE_Terrain...\n'}
+[0.693843] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found OGRE_Terrain: optimized;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so\n'}
+[0.693949] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for OGRE_Property...\n'}
+[0.694050] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found OGRE_Property: optimized;/usr/lib/x86_64-linux-gnu/libOgreProperty.so;debug;/usr/lib/x86_64-linux-gnu/libOgreProperty.so\n'}
+[0.694154] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for OGRE_RTShaderSystem...\n'}
+[0.694253] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found OGRE_RTShaderSystem: optimized;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so;debug;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so\n'}
+[0.694350] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for OGRE_Volume...\n'}
+[0.694452] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found OGRE_Volume: optimized;/usr/lib/x86_64-linux-gnu/libOgreVolume.so;debug;/usr/lib/x86_64-linux-gnu/libOgreVolume.so\n'}
+[0.694549] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for OGRE_Overlay...\n'}
+[0.694643] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found OGRE_Overlay: optimized;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so;debug;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so\n'}
+[0.700193] (-) TimerEvent: {}
+[0.789720] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.15.0\n'}
+[0.791729] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for ignition-transport8 -- found version 8.2.1\n'}
+[0.792150] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of ignition-transport8\n'}
+[0.800331] (-) TimerEvent: {}
+[0.813254] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found suitable version "3.12.4", minimum required is "3") \n'}
+[0.828782] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Config-file not installed for ZeroMQ -- checking for pkg-config\n'}
+[0.835045] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'libzmq >= 4'\n"}
+[0.866030] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found libzmq , version 4.3.4\n'}
+[0.898388] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'uuid'\n"}
+[0.900496] (-) TimerEvent: {}
+[0.909924] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found uuid, version 2.37.2\n'}
+[0.937709] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for ignition-msgs5 -- found version 5.8.1\n'}
+[0.938344] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of ignition-msgs5\n'}
+[0.961329] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.15.0\n'}
+[0.965960] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'tinyxml2'\n"}
+[0.977679] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found tinyxml2, version 9.0.0\n'}
+[1.000629] (-) TimerEvent: {}
+[1.005175] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for ignition-msgs5 -- found version 5.8.1\n'}
+[1.005850] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for ignition-common3 -- found version 3.14.0\n'}
+[1.006260] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of ignition-common3\n'}
+[1.006501] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for dlfcn.h - found\n'}
+[1.006560] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for libdl - found\n'}
+[1.016931] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for <ignition-common3> component [graphics]\n'}
+[1.017394] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for ignition-common3-graphics -- found version 3.14.0\n'}
+[1.017848] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of ignition-common3-graphics\n'}
+[1.018101] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.15.0\n'}
+[1.019547] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for ignition-fuel_tools4 -- found version 4.4.0\n'}
+[1.019806] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Searching for dependencies of ignition-fuel_tools4\n'}
+[1.059359] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'jsoncpp'\n"}
+[1.070721] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found jsoncpp, version 1.9.5\n'}
+[1.100795] (-) TimerEvent: {}
+[1.103063] (turtlebot3_gazebo) StdoutLine: {'line': b"-- Checking for module 'libzip'\n"}
+[1.114505] (turtlebot3_gazebo) StdoutLine: {'line': b'--   Found libzip, version 1.7.3\n'}
+[1.144522] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for ignition-common3 -- found version 3.14.0\n'}
+[1.144726] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for ignition-math6 -- found version 6.15.0\n'}
+[1.145246] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Looking for ignition-msgs5 -- found version 5.8.1\n'}
+[1.161749] (turtlebot3_gazebo) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:24 (find_package):\n'}
+[1.162115] (turtlebot3_gazebo) StderrLine: {'line': b'  By not providing "Findgazebo_ros_pkgs.cmake" in CMAKE_MODULE_PATH this\n'}
+[1.162188] (turtlebot3_gazebo) StderrLine: {'line': b'  project has asked CMake to find a package configuration file provided by\n'}
+[1.162245] (turtlebot3_gazebo) StderrLine: {'line': b'  "gazebo_ros_pkgs", but CMake did not find one.\n'}
+[1.162308] (turtlebot3_gazebo) StderrLine: {'line': b'\n'}
+[1.162363] (turtlebot3_gazebo) StderrLine: {'line': b'  Could not find a package configuration file provided by "gazebo_ros_pkgs"\n'}
+[1.162417] (turtlebot3_gazebo) StderrLine: {'line': b'  with any of the following names:\n'}
+[1.162474] (turtlebot3_gazebo) StderrLine: {'line': b'\n'}
+[1.162526] (turtlebot3_gazebo) StderrLine: {'line': b'    gazebo_ros_pkgsConfig.cmake\n'}
+[1.162578] (turtlebot3_gazebo) StderrLine: {'line': b'    gazebo_ros_pkgs-config.cmake\n'}
+[1.162631] (turtlebot3_gazebo) StderrLine: {'line': b'\n'}
+[1.162684] (turtlebot3_gazebo) StderrLine: {'line': b'  Add the installation prefix of "gazebo_ros_pkgs" to CMAKE_PREFIX_PATH or\n'}
+[1.162745] (turtlebot3_gazebo) StderrLine: {'line': b'  set "gazebo_ros_pkgs_DIR" to a directory containing one of the above files.\n'}
+[1.162798] (turtlebot3_gazebo) StderrLine: {'line': b'  If "gazebo_ros_pkgs" provides a separate development package or SDK, be\n'}
+[1.162851] (turtlebot3_gazebo) StderrLine: {'line': b'  sure it has been installed.\n'}
+[1.162904] (turtlebot3_gazebo) StderrLine: {'line': b'\n'}
+[1.162993] (turtlebot3_gazebo) StderrLine: {'line': b'\x1b[0m\n'}
+[1.163053] (turtlebot3_gazebo) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[1.163115] (turtlebot3_gazebo) StdoutLine: {'line': b'See also "/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/build/turtlebot3_gazebo/CMakeFiles/CMakeOutput.log".\n'}
+[1.168721] (turtlebot3_gazebo) StderrLine: {'line': b'gmake: *** [Makefile:390: cmake_check_build_system] Error 1\n'}
+[1.170601] (turtlebot3_gazebo) CommandEnded: {'returncode': 2}
+[1.200849] (-) TimerEvent: {}
+[1.253640] (turtlebot3_gazebo) JobEnded: {'identifier': 'turtlebot3_gazebo', 'rc': 2}
+[1.264212] (turtlebot3_simulations) JobSkipped: {'identifier': 'turtlebot3_simulations'}
+[1.264305] (-) EventReactorShutdown: {}

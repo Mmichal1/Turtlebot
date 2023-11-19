@@ -1,0 +1,681 @@
+[0.000000] (-) TimerEvent: {}
+[0.000873] (dynamixel_sdk) JobQueued: {'identifier': 'dynamixel_sdk', 'dependencies': OrderedDict()}
+[0.001314] (dynamixel_sdk_custom_interfaces) JobQueued: {'identifier': 'dynamixel_sdk_custom_interfaces', 'dependencies': OrderedDict()}
+[0.001373] (dynamixel_sdk_examples) JobQueued: {'identifier': 'dynamixel_sdk_examples', 'dependencies': OrderedDict([('dynamixel_sdk', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk'), ('dynamixel_sdk_custom_interfaces', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces')])}
+[0.001441] (dynamixel_sdk) JobStarted: {'identifier': 'dynamixel_sdk'}
+[0.099619] (-) TimerEvent: {}
+[0.142598] (dynamixel_sdk_custom_interfaces) JobStarted: {'identifier': 'dynamixel_sdk_custom_interfaces'}
+[0.199751] (-) TimerEvent: {}
+[0.280736] (dynamixel_sdk) JobProgress: {'identifier': 'dynamixel_sdk', 'progress': 'cmake'}
+[0.281204] (dynamixel_sdk) Command: {'cmd': ['/usr/bin/cmake', '/home/ros/turtlebot3/DynamixelSDK/dynamixel_sdk', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk'], 'cwd': '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk', 'env': OrderedDict([('HOSTNAME', 'envy-13'), ('IGNITION_VERSION', 'fortress'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ros'), ('OLDPWD', '/home/ros/turtlebot3'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3-2.1.5/install:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('RUNLEVEL', '3'), ('XDG_RUNTIME_DIR', '/tmp/runtime-ros'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('AMENT_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble'), ('PWD', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble')]), 'shell': False}
+[0.285654] (dynamixel_sdk_custom_interfaces) JobProgress: {'identifier': 'dynamixel_sdk_custom_interfaces', 'progress': 'cmake'}
+[0.286187] (dynamixel_sdk_custom_interfaces) Command: {'cmd': ['/usr/bin/cmake', '/home/ros/turtlebot3/DynamixelSDK/dynamixel_sdk_custom_interfaces', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces'], 'cwd': '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_custom_interfaces', 'env': OrderedDict([('HOSTNAME', 'envy-13'), ('IGNITION_VERSION', 'fortress'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ros'), ('OLDPWD', '/home/ros/turtlebot3'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3-2.1.5/install:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('RUNLEVEL', '3'), ('XDG_RUNTIME_DIR', '/tmp/runtime-ros'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('AMENT_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble'), ('PWD', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_custom_interfaces'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble')]), 'shell': False}
+[0.299889] (-) TimerEvent: {}
+[0.375084] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.375689] (dynamixel_sdk) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.400018] (-) TimerEvent: {}
+[0.466880] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.467674] (dynamixel_sdk) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.480783] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.483276] (dynamixel_sdk) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.500156] (-) TimerEvent: {}
+[0.595150] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.599251] (dynamixel_sdk) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.600254] (-) TimerEvent: {}
+[0.612724] (dynamixel_sdk) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.613118] (dynamixel_sdk) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.613767] (dynamixel_sdk) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.616290] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.616866] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.617864] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.619240] (dynamixel_sdk) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.625344] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.700398] (-) TimerEvent: {}
+[0.759841] (dynamixel_sdk) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.769589] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.784034] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.784421] (dynamixel_sdk) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.784903] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.785284] (dynamixel_sdk) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.785936] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.786625] (dynamixel_sdk) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.796785] (dynamixel_sdk) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.5 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.797125] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.5 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.800554] (-) TimerEvent: {}
+[0.901279] (-) TimerEvent: {}
+[1.001981] (-) TimerEvent: {}
+[1.102527] (-) TimerEvent: {}
+[1.158888] (dynamixel_sdk) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter \n'}
+[1.179969] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter \n'}
+[1.202659] (-) TimerEvent: {}
+[1.283377] (dynamixel_sdk) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[1.300538] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[1.302794] (-) TimerEvent: {}
+[1.381271] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Found builtin_interfaces: 1.2.1 (/opt/ros/humble/share/builtin_interfaces/cmake)\n'}
+[1.402932] (-) TimerEvent: {}
+[1.467078] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[1.483442] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[1.494360] (dynamixel_sdk) StdoutLine: {'line': b'-- Configuring done\n'}
+[1.503078] (-) TimerEvent: {}
+[1.507561] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[1.508148] (dynamixel_sdk) StdoutLine: {'line': b'-- Generating done\n'}
+[1.510703] (dynamixel_sdk) StdoutLine: {'line': b'-- Build files have been written to: /home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk\n'}
+[1.519436] (dynamixel_sdk) CommandEnded: {'returncode': 0}
+[1.520347] (dynamixel_sdk) JobProgress: {'identifier': 'dynamixel_sdk', 'progress': 'build'}
+[1.522346] (dynamixel_sdk) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk', '--', '-j8', '-l8'], 'cwd': '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk', 'env': OrderedDict([('HOSTNAME', 'envy-13'), ('IGNITION_VERSION', 'fortress'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ros'), ('OLDPWD', '/home/ros/turtlebot3'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3-2.1.5/install:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('RUNLEVEL', '3'), ('XDG_RUNTIME_DIR', '/tmp/runtime-ros'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('AMENT_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble'), ('PWD', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble')]), 'shell': False}
+[1.548227] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.594536] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.603220] (-) TimerEvent: {}
+[1.618810] (dynamixel_sdk) StdoutLine: {'line': b'[ 20%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk.dir/src/dynamixel_sdk/group_bulk_read.cpp.o\x1b[0m\n'}
+[1.621325] (dynamixel_sdk) StdoutLine: {'line': b'[ 20%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk.dir/src/dynamixel_sdk/group_sync_write.cpp.o\x1b[0m\n'}
+[1.621707] (dynamixel_sdk) StdoutLine: {'line': b'[ 30%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk.dir/src/dynamixel_sdk/group_sync_read.cpp.o\x1b[0m\n'}
+[1.621947] (dynamixel_sdk) StdoutLine: {'line': b'[ 40%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk.dir/src/dynamixel_sdk/group_bulk_write.cpp.o\x1b[0m\n'}
+[1.622190] (dynamixel_sdk) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk.dir/src/dynamixel_sdk/protocol1_packet_handler.cpp.o\x1b[0m\n'}
+[1.625766] (dynamixel_sdk) StdoutLine: {'line': b'[ 60%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk.dir/src/dynamixel_sdk/packet_handler.cpp.o\x1b[0m\n'}
+[1.636902] (dynamixel_sdk) StdoutLine: {'line': b'[ 70%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk.dir/src/dynamixel_sdk/port_handler.cpp.o\x1b[0m\n'}
+[1.640512] (dynamixel_sdk) StdoutLine: {'line': b'[ 80%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk.dir/src/dynamixel_sdk/protocol2_packet_handler.cpp.o\x1b[0m\n'}
+[1.666464] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)\n'}
+[1.703468] (-) TimerEvent: {}
+[1.804108] (-) TimerEvent: {}
+[1.904852] (-) TimerEvent: {}
+[1.924770] (dynamixel_sdk) StdoutLine: {'line': b'[ 90%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk.dir/src/dynamixel_sdk/port_handler_linux.cpp.o\x1b[0m\n'}
+[2.004964] (-) TimerEvent: {}
+[2.106012] (-) TimerEvent: {}
+[2.206577] (-) TimerEvent: {}
+[2.307312] (-) TimerEvent: {}
+[2.408050] (-) TimerEvent: {}
+[2.508623] (-) TimerEvent: {}
+[2.609240] (-) TimerEvent: {}
+[2.709886] (-) TimerEvent: {}
+[2.733780] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)\n'}
+[2.810028] (-) TimerEvent: {}
+[2.911066] (-) TimerEvent: {}
+[3.011614] (-) TimerEvent: {}
+[3.112183] (-) TimerEvent: {}
+[3.212708] (-) TimerEvent: {}
+[3.313208] (-) TimerEvent: {}
+[3.354924] (dynamixel_sdk) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX shared library libdynamixel_sdk.so\x1b[0m\n'}
+[3.413353] (-) TimerEvent: {}
+[3.513891] (-) TimerEvent: {}
+[3.540337] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[3.544649] (dynamixel_sdk) StdoutLine: {'line': b'[100%] Built target dynamixel_sdk\n'}
+[3.567356] (dynamixel_sdk) CommandEnded: {'returncode': 0}
+[3.614018] (-) TimerEvent: {}
+[3.650909] (dynamixel_sdk) JobProgress: {'identifier': 'dynamixel_sdk', 'progress': 'install'}
+[3.667048] (dynamixel_sdk) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk'], 'cwd': '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk', 'env': OrderedDict([('HOSTNAME', 'envy-13'), ('IGNITION_VERSION', 'fortress'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ros'), ('OLDPWD', '/home/ros/turtlebot3'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3-2.1.5/install:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('RUNLEVEL', '3'), ('XDG_RUNTIME_DIR', '/tmp/runtime-ros'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('AMENT_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble'), ('PWD', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble')]), 'shell': False}
+[3.682800] (dynamixel_sdk) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[3.683619] (dynamixel_sdk) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[3.684670] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/include//dynamixel_sdk/dynamixel_sdk.h\n'}
+[3.700638] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/include//dynamixel_sdk/group_bulk_read.h\n'}
+[3.714214] (-) TimerEvent: {}
+[3.717240] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/include//dynamixel_sdk/group_bulk_write.h\n'}
+[3.731839] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/include//dynamixel_sdk/group_sync_read.h\n'}
+[3.749905] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/include//dynamixel_sdk/group_sync_write.h\n'}
+[3.764523] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/include//dynamixel_sdk/packet_handler.h\n'}
+[3.781988] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/include//dynamixel_sdk/port_handler.h\n'}
+[3.787131] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[3.796765] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/include//dynamixel_sdk/port_handler_arduino.h\n'}
+[3.813013] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/include//dynamixel_sdk/port_handler_linux.h\n'}
+[3.814339] (-) TimerEvent: {}
+[3.828273] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/include//dynamixel_sdk/port_handler_mac.h\n'}
+[3.830247] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") \n'}
+[3.836080] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)\n'}
+[3.844981] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/include//dynamixel_sdk/port_handler_windows.h\n'}
+[3.860586] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/include//dynamixel_sdk/protocol1_packet_handler.h\n'}
+[3.876768] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/include//dynamixel_sdk/protocol2_packet_handler.h\n'}
+[3.888190] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") \n'}
+[3.888644] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[3.888874] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10\n'}
+[3.889061] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so\n'}
+[3.892061] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/lib/libdynamixel_sdk.so\n'}
+[3.909408] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/environment/library_path.sh\n'}
+[3.914546] (-) TimerEvent: {}
+[3.925471] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/environment/library_path.dsv\n'}
+[3.931889] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Found PythonExtra: .so  \n'}
+[3.942028] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/ament_index/resource_index/package_run_dependencies/dynamixel_sdk\n'}
+[3.958685] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/ament_index/resource_index/parent_prefix_path/dynamixel_sdk\n'}
+[3.974046] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/environment/ament_prefix_path.sh\n'}
+[3.989072] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/environment/ament_prefix_path.dsv\n'}
+[4.005153] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/environment/path.sh\n'}
+[4.014675] (-) TimerEvent: {}
+[4.019793] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/environment/path.dsv\n'}
+[4.023017] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Configuring done\n'}
+[4.033966] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/local_setup.bash\n'}
+[4.051697] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/local_setup.sh\n'}
+[4.066480] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/local_setup.zsh\n'}
+[4.082954] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/local_setup.dsv\n'}
+[4.093021] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Generating done\n'}
+[4.097986] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/package.dsv\n'}
+[4.098481] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Build files have been written to: /home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_custom_interfaces\n'}
+[4.108879] (dynamixel_sdk_custom_interfaces) CommandEnded: {'returncode': 0}
+[4.109844] (dynamixel_sdk_custom_interfaces) JobProgress: {'identifier': 'dynamixel_sdk_custom_interfaces', 'progress': 'build'}
+[4.110311] (dynamixel_sdk_custom_interfaces) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_custom_interfaces', '--', '-j8', '-l8'], 'cwd': '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_custom_interfaces', 'env': OrderedDict([('HOSTNAME', 'envy-13'), ('IGNITION_VERSION', 'fortress'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ros'), ('OLDPWD', '/home/ros/turtlebot3'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3-2.1.5/install:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('RUNLEVEL', '3'), ('XDG_RUNTIME_DIR', '/tmp/runtime-ros'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('AMENT_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble'), ('PWD', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_custom_interfaces'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble')]), 'shell': False}
+[4.114797] (-) TimerEvent: {}
+[4.120822] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/ament_index/resource_index/packages/dynamixel_sdk\n'}
+[4.136425] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[4.153966] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[4.170011] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/cmake/dynamixel_sdkConfig.cmake\n'}
+[4.188943] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[  2%] \x1b[34m\x1b[1mGenerating C code for ROS interfaces\x1b[0m\n'}
+[4.191326] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/cmake/dynamixel_sdkConfig-version.cmake\n'}
+[4.209636] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[  5%] \x1b[34m\x1b[1mGenerating C++ code for ROS interfaces\x1b[0m\n'}
+[4.213544] (dynamixel_sdk) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/package.xml\n'}
+[4.214902] (-) TimerEvent: {}
+[4.227366] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[  5%] Built target ament_cmake_python_symlink_dynamixel_sdk_custom_interfaces\n'}
+[4.246603] (dynamixel_sdk) CommandEnded: {'returncode': 0}
+[4.315049] (-) TimerEvent: {}
+[4.420242] (-) TimerEvent: {}
+[4.520741] (-) TimerEvent: {}
+[4.621246] (-) TimerEvent: {}
+[4.721795] (-) TimerEvent: {}
+[4.822891] (-) TimerEvent: {}
+[4.911887] (dynamixel_sdk) JobEnded: {'identifier': 'dynamixel_sdk', 'rc': 0}
+[4.923031] (-) TimerEvent: {}
+[4.937049] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'running egg_info\n'}
+[4.939548] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'creating dynamixel_sdk_custom_interfaces.egg-info\n'}
+[4.940117] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'writing dynamixel_sdk_custom_interfaces.egg-info/PKG-INFO\n'}
+[4.940687] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'writing dependency_links to dynamixel_sdk_custom_interfaces.egg-info/dependency_links.txt\n'}
+[4.941286] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'writing top-level names to dynamixel_sdk_custom_interfaces.egg-info/top_level.txt\n'}
+[4.941839] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b"writing manifest file 'dynamixel_sdk_custom_interfaces.egg-info/SOURCES.txt'\n"}
+[4.947001] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b"reading manifest file 'dynamixel_sdk_custom_interfaces.egg-info/SOURCES.txt'\n"}
+[4.948452] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b"writing manifest file 'dynamixel_sdk_custom_interfaces.egg-info/SOURCES.txt'\n"}
+[5.004776] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[  5%] Built target ament_cmake_python_build_dynamixel_sdk_custom_interfaces_egg\n'}
+[5.023172] (-) TimerEvent: {}
+[5.112641] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[  5%] Built target dynamixel_sdk_custom_interfaces__cpp\n'}
+[5.123314] (-) TimerEvent: {}
+[5.131897] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 12%] \x1b[34m\x1b[1mGenerating C++ type support dispatch for ROS interfaces\x1b[0m\n'}
+[5.132385] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 12%] \x1b[34m\x1b[1mGenerating C++ type support for eProsima Fast-RTPS\x1b[0m\n'}
+[5.132640] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 12%] \x1b[34m\x1b[1mGenerating C++ introspection for ROS interfaces\x1b[0m\n'}
+[5.223447] (-) TimerEvent: {}
+[5.323844] (-) TimerEvent: {}
+[5.410646] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 15%] \x1b[32mBuilding C object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_generator_c.dir/rosidl_generator_c/dynamixel_sdk_custom_interfaces/msg/detail/set_position__functions.c.o\x1b[0m\n'}
+[5.411825] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 17%] \x1b[32mBuilding C object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_generator_c.dir/rosidl_generator_c/dynamixel_sdk_custom_interfaces/srv/detail/get_position__functions.c.o\x1b[0m\n'}
+[5.423984] (-) TimerEvent: {}
+[5.525151] (-) TimerEvent: {}
+[5.531152] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 20%] \x1b[32m\x1b[1mLinking C shared library libdynamixel_sdk_custom_interfaces__rosidl_generator_c.so\x1b[0m\n'}
+[5.612429] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 20%] Built target dynamixel_sdk_custom_interfaces__rosidl_generator_c\n'}
+[5.625310] (-) TimerEvent: {}
+[5.634826] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 23%] \x1b[34m\x1b[1mGenerating C introspection for ROS interfaces\x1b[0m\n'}
+[5.640931] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 25%] \x1b[34m\x1b[1mGenerating C type support for eProsima Fast-RTPS\x1b[0m\n'}
+[5.645017] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 28%] \x1b[34m\x1b[1mGenerating C type support dispatch for ROS interfaces\x1b[0m\n'}
+[5.725459] (-) TimerEvent: {}
+[5.825969] (-) TimerEvent: {}
+[5.926477] (-) TimerEvent: {}
+[6.026972] (-) TimerEvent: {}
+[6.093360] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 30%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/dynamixel_sdk_custom_interfaces/msg/detail/set_position__type_support.cpp.o\x1b[0m\n'}
+[6.100544] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 33%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/dynamixel_sdk_custom_interfaces/srv/detail/get_position__type_support.cpp.o\x1b[0m\n'}
+[6.127124] (-) TimerEvent: {}
+[6.228029] (-) TimerEvent: {}
+[6.255638] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 35%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/dynamixel_sdk_custom_interfaces/srv/get_position__type_support.cpp.o\x1b[0m\n'}
+[6.294719] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 38%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/dynamixel_sdk_custom_interfaces/msg/set_position__type_support.cpp.o\x1b[0m\n'}
+[6.328176] (-) TimerEvent: {}
+[6.429302] (-) TimerEvent: {}
+[6.529805] (-) TimerEvent: {}
+[6.638174] (-) TimerEvent: {}
+[6.708180] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 41%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/dynamixel_sdk_custom_interfaces/msg/detail/dds_fastrtps/set_position__type_support.cpp.o\x1b[0m\n'}
+[6.738325] (-) TimerEvent: {}
+[6.839582] (-) TimerEvent: {}
+[6.863807] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 43%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/dynamixel_sdk_custom_interfaces/msg/set_position__type_support.cpp.o\x1b[0m\n'}
+[6.939778] (-) TimerEvent: {}
+[7.009018] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 46%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/dynamixel_sdk_custom_interfaces/srv/get_position__type_support.cpp.o\x1b[0m\n'}
+[7.039904] (-) TimerEvent: {}
+[7.069089] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 48%] \x1b[32mBuilding C object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/dynamixel_sdk_custom_interfaces/msg/detail/set_position__type_support.c.o\x1b[0m\n'}
+[7.110541] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 51%] \x1b[32m\x1b[1mLinking CXX shared library libdynamixel_sdk_custom_interfaces__rosidl_typesupport_c.so\x1b[0m\n'}
+[7.146275] (-) TimerEvent: {}
+[7.194781] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 53%] \x1b[32mBuilding C object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/dynamixel_sdk_custom_interfaces/srv/detail/get_position__type_support.c.o\x1b[0m\n'}
+[7.197991] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 56%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/dynamixel_sdk_custom_interfaces/msg/detail/set_position__type_support_c.cpp.o\x1b[0m\n'}
+[7.246447] (-) TimerEvent: {}
+[7.319265] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 58%] \x1b[32m\x1b[1mLinking C shared library libdynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_c.so\x1b[0m\n'}
+[7.354801] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 61%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/dynamixel_sdk_custom_interfaces/srv/detail/get_position__type_support_c.cpp.o\x1b[0m\n'}
+[7.355217] (-) TimerEvent: {}
+[7.376707] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 61%] Built target dynamixel_sdk_custom_interfaces__rosidl_typesupport_c\n'}
+[7.433620] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 64%] \x1b[32m\x1b[1mLinking CXX shared library libdynamixel_sdk_custom_interfaces__rosidl_typesupport_cpp.so\x1b[0m\n'}
+[7.449529] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 66%] \x1b[32mBuilding CXX object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/dynamixel_sdk_custom_interfaces/srv/detail/dds_fastrtps/get_position__type_support.cpp.o\x1b[0m\n'}
+[7.455391] (-) TimerEvent: {}
+[7.493080] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 66%] Built target dynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_c\n'}
+[7.555695] (-) TimerEvent: {}
+[7.579859] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 66%] Built target dynamixel_sdk_custom_interfaces__rosidl_typesupport_cpp\n'}
+[7.655854] (-) TimerEvent: {}
+[7.719681] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 69%] \x1b[32m\x1b[1mLinking CXX shared library libdynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_cpp.so\x1b[0m\n'}
+[7.756010] (-) TimerEvent: {}
+[7.856565] (-) TimerEvent: {}
+[7.858739] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 69%] Built target dynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_cpp\n'}
+[7.956742] (-) TimerEvent: {}
+[8.057407] (-) TimerEvent: {}
+[8.157867] (-) TimerEvent: {}
+[8.258293] (-) TimerEvent: {}
+[8.358696] (-) TimerEvent: {}
+[8.459076] (-) TimerEvent: {}
+[8.486313] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 71%] \x1b[32m\x1b[1mLinking CXX shared library libdynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_c.so\x1b[0m\n'}
+[8.559222] (-) TimerEvent: {}
+[8.628707] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 71%] Built target dynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_c\n'}
+[8.659360] (-) TimerEvent: {}
+[8.725239] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 74%] \x1b[32m\x1b[1mLinking CXX shared library libdynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_cpp.so\x1b[0m\n'}
+[8.759499] (-) TimerEvent: {}
+[8.859994] (-) TimerEvent: {}
+[8.876482] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 74%] Built target dynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_cpp\n'}
+[8.914829] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 74%] Built target dynamixel_sdk_custom_interfaces\n'}
+[8.952742] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 76%] \x1b[34m\x1b[1mGenerating Python code for ROS interfaces\x1b[0m\n'}
+[8.960070] (-) TimerEvent: {}
+[9.060478] (-) TimerEvent: {}
+[9.160875] (-) TimerEvent: {}
+[9.261275] (-) TimerEvent: {}
+[9.361670] (-) TimerEvent: {}
+[9.462061] (-) TimerEvent: {}
+[9.562531] (-) TimerEvent: {}
+[9.662952] (-) TimerEvent: {}
+[9.763305] (-) TimerEvent: {}
+[9.787850] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 76%] Built target dynamixel_sdk_custom_interfaces__py\n'}
+[9.821485] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 82%] \x1b[32mBuilding C object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_generator_py.dir/rosidl_generator_py/dynamixel_sdk_custom_interfaces/msg/_set_position_s.c.o\x1b[0m\n'}
+[9.821794] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 82%] \x1b[32mBuilding C object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_generator_py.dir/rosidl_generator_py/dynamixel_sdk_custom_interfaces/srv/_get_position_s.c.o\x1b[0m\n'}
+[9.863453] (-) TimerEvent: {}
+[9.963927] (-) TimerEvent: {}
+[9.994652] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 84%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/dynamixel_sdk_custom_interfaces/libdynamixel_sdk_custom_interfaces__rosidl_generator_py.so\x1b[0m\n'}
+[10.061337] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 84%] Built target dynamixel_sdk_custom_interfaces__rosidl_generator_py\n'}
+[10.064049] (-) TimerEvent: {}
+[10.094451] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 92%] \x1b[32mBuilding C object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/dynamixel_sdk_custom_interfaces/_dynamixel_sdk_custom_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o\x1b[0m\n'}
+[10.094818] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 92%] \x1b[32mBuilding C object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/dynamixel_sdk_custom_interfaces/_dynamixel_sdk_custom_interfaces_s.ep.rosidl_typesupport_c.c.o\x1b[0m\n'}
+[10.095036] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 92%] \x1b[32mBuilding C object CMakeFiles/dynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/dynamixel_sdk_custom_interfaces/_dynamixel_sdk_custom_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o\x1b[0m\n'}
+[10.164202] (-) TimerEvent: {}
+[10.264682] (-) TimerEvent: {}
+[10.284947] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 97%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[10.285370] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[ 97%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[10.288017] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[10.354008] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[100%] Built target dynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_c__pyext\n'}
+[10.364826] (-) TimerEvent: {}
+[10.365648] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[100%] Built target dynamixel_sdk_custom_interfaces__rosidl_typesupport_c__pyext\n'}
+[10.370027] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'[100%] Built target dynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_c__pyext\n'}
+[10.393802] (dynamixel_sdk_custom_interfaces) CommandEnded: {'returncode': 0}
+[10.465114] (-) TimerEvent: {}
+[10.543129] (dynamixel_sdk_custom_interfaces) JobProgress: {'identifier': 'dynamixel_sdk_custom_interfaces', 'progress': 'install'}
+[10.543820] (dynamixel_sdk_custom_interfaces) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_custom_interfaces'], 'cwd': '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_custom_interfaces', 'env': OrderedDict([('HOSTNAME', 'envy-13'), ('IGNITION_VERSION', 'fortress'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ros'), ('OLDPWD', '/home/ros/turtlebot3'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3-2.1.5/install:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('RUNLEVEL', '3'), ('XDG_RUNTIME_DIR', '/tmp/runtime-ros'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('AMENT_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble'), ('PWD', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_custom_interfaces'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble')]), 'shell': False}
+[10.557513] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[10.558590] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[10.559093] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/ament_index/resource_index/rosidl_interfaces/dynamixel_sdk_custom_interfaces\n'}
+[10.565232] (-) TimerEvent: {}
+[10.573476] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/detail/set_position__functions.h\n'}
+[10.589098] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/detail/set_position__struct.h\n'}
+[10.603002] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/detail/set_position__type_support.h\n'}
+[10.617393] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/rosidl_generator_c__visibility_control.h\n'}
+[10.630828] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/set_position.h\n'}
+[10.644994] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/srv/detail/get_position__functions.h\n'}
+[10.659026] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/srv/detail/get_position__struct.h\n'}
+[10.665381] (-) TimerEvent: {}
+[10.672147] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/srv/detail/get_position__type_support.h\n'}
+[10.686420] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/srv/get_position.h\n'}
+[10.699296] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/environment/library_path.sh\n'}
+[10.713674] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/environment/library_path.dsv\n'}
+[10.727728] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/detail/set_position__rosidl_typesupport_fastrtps_c.h\n'}
+[10.740513] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h\n'}
+[10.754362] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/srv/detail/get_position__rosidl_typesupport_fastrtps_c.h\n'}
+[10.765595] (-) TimerEvent: {}
+[10.767350] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/detail/set_position__builder.hpp\n'}
+[10.781316] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/detail/set_position__struct.hpp\n'}
+[10.795137] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/detail/set_position__traits.hpp\n'}
+[10.809201] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/set_position.hpp\n'}
+[10.822576] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/srv/detail/get_position__builder.hpp\n'}
+[10.834643] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/srv/detail/get_position__struct.hpp\n'}
+[10.848223] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/srv/detail/get_position__traits.hpp\n'}
+[10.861353] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/srv/get_position.hpp\n'}
+[10.865695] (-) TimerEvent: {}
+[10.875610] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/detail/set_position__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[10.889352] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h\n'}
+[10.902544] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/srv/detail/get_position__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[10.917737] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/detail/set_position__rosidl_typesupport_introspection_c.h\n'}
+[10.930525] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h\n'}
+[10.945012] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/srv/detail/get_position__rosidl_typesupport_introspection_c.h\n'}
+[10.958306] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/msg/detail/set_position__rosidl_typesupport_introspection_cpp.hpp\n'}
+[10.965830] (-) TimerEvent: {}
+[10.971142] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/include/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces/srv/detail/get_position__rosidl_typesupport_introspection_cpp.hpp\n'}
+[10.985035] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/environment/pythonpath.sh\n'}
+[10.997561] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/environment/pythonpath.dsv\n'}
+[11.011530] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces-3.7.60-py3.10.egg-info/PKG-INFO\n'}
+[11.024189] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces-3.7.60-py3.10.egg-info/SOURCES.txt\n'}
+[11.036742] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces-3.7.60-py3.10.egg-info/dependency_links.txt\n'}
+[11.050680] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces-3.7.60-py3.10.egg-info/top_level.txt\n'}
+[11.065990] (-) TimerEvent: {}
+[11.068187] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/__init__.py\n'}
+[11.081512] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/_dynamixel_sdk_custom_interfaces_s.ep.rosidl_typesupport_c.c\n'}
+[11.094582] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/_dynamixel_sdk_custom_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c\n'}
+[11.106691] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/_dynamixel_sdk_custom_interfaces_s.ep.rosidl_typesupport_introspection_c.c\n'}
+[11.120856] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\n'}
+[11.132918] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\n'}
+[11.146361] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\n'}
+[11.159262] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/libdynamixel_sdk_custom_interfaces__rosidl_generator_py.so\n'}
+[11.166238] (-) TimerEvent: {}
+[11.171447] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/msg/__init__.py\n'}
+[11.185299] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/msg/_set_position.py\n'}
+[11.197888] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/msg/_set_position_s.c\n'}
+[11.211491] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/srv/__init__.py\n'}
+[11.224421] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/srv/_get_position.py\n'}
+[11.236384] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/srv/_get_position_s.c\n'}
+[11.250581] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\n'}
+[11.250901] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\n'}
+[11.251275] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Up-to-date symlink: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/dynamixel_sdk_custom_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\n'}
+[11.251567] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/msg/SetPosition.idl\n'}
+[11.264004] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/srv/GetPosition.idl\n'}
+[11.266359] (-) TimerEvent: {}
+[11.277512] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/msg/SetPosition.msg\n'}
+[11.290633] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/srv/GetPosition.srv\n'}
+[11.303263] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/srv/GetPosition_Request.msg\n'}
+[11.317367] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/srv/GetPosition_Response.msg\n'}
+[11.329498] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/ament_index/resource_index/package_run_dependencies/dynamixel_sdk_custom_interfaces\n'}
+[11.342252] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/ament_index/resource_index/parent_prefix_path/dynamixel_sdk_custom_interfaces\n'}
+[11.355867] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/environment/ament_prefix_path.sh\n'}
+[11.366515] (-) TimerEvent: {}
+[11.368131] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/environment/ament_prefix_path.dsv\n'}
+[11.381402] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/environment/path.sh\n'}
+[11.394243] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/environment/path.dsv\n'}
+[11.406862] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/local_setup.bash\n'}
+[11.420678] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/local_setup.sh\n'}
+[11.432734] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/local_setup.zsh\n'}
+[11.446065] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/local_setup.dsv\n'}
+[11.459050] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/package.dsv\n'}
+[11.466647] (-) TimerEvent: {}
+[11.470977] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/ament_index/resource_index/packages/dynamixel_sdk_custom_interfaces\n'}
+[11.484896] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/rosidl_cmake-extras.cmake\n'}
+[11.497215] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[11.510765] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[11.523714] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[11.536710] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[11.550567] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake\n'}
+[11.562768] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake\n'}
+[11.566775] (-) TimerEvent: {}
+[11.575523] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/dynamixel_sdk_custom_interfacesConfig.cmake\n'}
+[11.588955] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/dynamixel_sdk_custom_interfacesConfig-version.cmake\n'}
+[11.602213] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/package.xml\n'}
+[11.616347] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_generator_c.so\n'}
+[11.617147] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_generator_c.so" to ""\n'}
+[11.617304] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_c.so\n'}
+[11.617941] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_c.so" to ""\n'}
+[11.618186] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_cpp.so\n'}
+[11.619023] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""\n'}
+[11.619229] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_c.so\n'}
+[11.619753] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_c.so" to ""\n'}
+[11.619900] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_typesupport_c.so\n'}
+[11.620530] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_typesupport_c.so" to ""\n'}
+[11.620655] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_cpp.so\n'}
+[11.621270] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_cpp.so" to ""\n'}
+[11.621391] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_typesupport_cpp.so\n'}
+[11.622049] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_typesupport_cpp.so" to ""\n'}
+[11.666912] (-) TimerEvent: {}
+[11.677434] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b"Listing '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces'...\n"}
+[11.677796] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b"Compiling '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/__init__.py'...\n"}
+[11.677943] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b"Listing '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/msg'...\n"}
+[11.678101] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b"Compiling '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/msg/__init__.py'...\n"}
+[11.678226] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b"Compiling '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/msg/_set_position.py'...\n"}
+[11.678328] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b"Listing '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/srv'...\n"}
+[11.678435] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b"Compiling '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/srv/__init__.py'...\n"}
+[11.678538] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b"Compiling '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages/dynamixel_sdk_custom_interfaces/srv/_get_position.py'...\n"}
+[11.685276] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_generator_py.so\n'}
+[11.686015] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib/libdynamixel_sdk_custom_interfaces__rosidl_generator_py.so" to ""\n'}
+[11.686443] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/export_dynamixel_sdk_custom_interfaces__rosidl_generator_cExport.cmake\n'}
+[11.686757] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/export_dynamixel_sdk_custom_interfaces__rosidl_generator_cExport-noconfig.cmake\n'}
+[11.687020] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/export_dynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_cExport.cmake\n'}
+[11.687371] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/export_dynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake\n'}
+[11.687683] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/export_dynamixel_sdk_custom_interfaces__rosidl_generator_cppExport.cmake\n'}
+[11.688006] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/export_dynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake\n'}
+[11.688263] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/export_dynamixel_sdk_custom_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake\n'}
+[11.688667] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/dynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_cExport.cmake\n'}
+[11.688924] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/dynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake\n'}
+[11.689327] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/dynamixel_sdk_custom_interfaces__rosidl_typesupport_cExport.cmake\n'}
+[11.689575] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/dynamixel_sdk_custom_interfaces__rosidl_typesupport_cExport-noconfig.cmake\n'}
+[11.689969] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/dynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_cppExport.cmake\n'}
+[11.690300] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/dynamixel_sdk_custom_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake\n'}
+[11.690590] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/dynamixel_sdk_custom_interfaces__rosidl_typesupport_cppExport.cmake\n'}
+[11.690937] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/dynamixel_sdk_custom_interfaces__rosidl_typesupport_cppExport-noconfig.cmake\n'}
+[11.691274] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/export_dynamixel_sdk_custom_interfaces__rosidl_generator_pyExport.cmake\n'}
+[11.691585] (dynamixel_sdk_custom_interfaces) StdoutLine: {'line': b'-- Installing: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake/export_dynamixel_sdk_custom_interfaces__rosidl_generator_pyExport-noconfig.cmake\n'}
+[11.695391] (dynamixel_sdk_custom_interfaces) CommandEnded: {'returncode': 0}
+[11.767036] (-) TimerEvent: {}
+[11.867577] (-) TimerEvent: {}
+[11.968033] (-) TimerEvent: {}
+[12.033800] (dynamixel_sdk_custom_interfaces) JobEnded: {'identifier': 'dynamixel_sdk_custom_interfaces', 'rc': 0}
+[12.035152] (dynamixel_sdk_examples) JobStarted: {'identifier': 'dynamixel_sdk_examples'}
+[12.068233] (-) TimerEvent: {}
+[12.168686] (-) TimerEvent: {}
+[12.189535] (dynamixel_sdk_examples) JobProgress: {'identifier': 'dynamixel_sdk_examples', 'progress': 'cmake'}
+[12.190007] (dynamixel_sdk_examples) Command: {'cmd': ['/usr/bin/cmake', '/home/ros/turtlebot3/DynamixelSDK/dynamixel_sdk_examples', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples'], 'cwd': '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_examples', 'env': OrderedDict([('HOSTNAME', 'envy-13'), ('IGNITION_VERSION', 'fortress'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/lib:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ros'), ('OLDPWD', '/home/ros/turtlebot3'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3-2.1.5/install:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('RUNLEVEL', '3'), ('XDG_RUNTIME_DIR', '/tmp/runtime-ros'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('AMENT_PREFIX_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble'), ('PWD', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_examples'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble')]), 'shell': False}
+[12.268869] (-) TimerEvent: {}
+[12.274048] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[12.364889] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[12.369001] (-) TimerEvent: {}
+[12.377338] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[12.469131] (-) TimerEvent: {}
+[12.484483] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[12.503590] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[12.504112] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[12.504936] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[12.512246] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[12.569280] (-) TimerEvent: {}
+[12.641741] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[12.661595] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[12.662191] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[12.663339] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[12.669464] (-) TimerEvent: {}
+[12.672634] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.5 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[12.769627] (-) TimerEvent: {}
+[12.869985] (-) TimerEvent: {}
+[12.970369] (-) TimerEvent: {}
+[12.977408] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter \n'}
+[13.070504] (-) TimerEvent: {}
+[13.081355] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[13.156950] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Found dynamixel_sdk: 3.7.60 (/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/share/dynamixel_sdk/cmake)\n'}
+[13.159254] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Found dynamixel_sdk_custom_interfaces: 3.7.60 (/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/share/dynamixel_sdk_custom_interfaces/cmake)\n'}
+[13.170633] (-) TimerEvent: {}
+[13.239642] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[13.252881] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[13.270265] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[13.270701] (-) TimerEvent: {}
+[13.298140] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[13.335680] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[13.370853] (-) TimerEvent: {}
+[13.433547] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Found rclcpp: 16.0.6 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[13.470966] (-) TimerEvent: {}
+[13.557485] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[13.564044] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.4 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[13.571106] (-) TimerEvent: {}
+[13.671463] (-) TimerEvent: {}
+[13.752096] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[13.771599] (-) TimerEvent: {}
+[13.806031] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[13.871724] (-) TimerEvent: {}
+[13.900763] (dynamixel_sdk_examples) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[13.926205] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[13.971895] (-) TimerEvent: {}
+[14.035855] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[14.036214] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[14.072048] (-) TimerEvent: {}
+[14.152650] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[14.154652] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[14.172232] (-) TimerEvent: {}
+[14.272629] (-) TimerEvent: {}
+[14.373028] (-) TimerEvent: {}
+[14.473409] (-) TimerEvent: {}
+[14.479182] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.8 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[14.573523] (-) TimerEvent: {}
+[14.647952] (dynamixel_sdk_examples) StdoutLine: {'line': b"-- Added test 'copyright' to check source files copyright and LICENSE\n"}
+[14.649893] (dynamixel_sdk_examples) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[14.650233] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Configured cppcheck include dirs: /home/ros/turtlebot3/DynamixelSDK/dynamixel_sdk_examples/include\n'}
+[14.650387] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[14.651871] (dynamixel_sdk_examples) StdoutLine: {'line': b"-- Added test 'cpplint' to check C / C++ code against the Google style\n"}
+[14.652109] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Configured cpplint exclude dirs and/or files: \n'}
+[14.653153] (dynamixel_sdk_examples) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[14.655004] (dynamixel_sdk_examples) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[14.655165] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[14.655905] (dynamixel_sdk_examples) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[14.658469] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Configuring done\n'}
+[14.673128] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Generating done\n'}
+[14.673606] (-) TimerEvent: {}
+[14.675347] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Build files have been written to: /home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_examples\n'}
+[14.690716] (dynamixel_sdk_examples) CommandEnded: {'returncode': 0}
+[14.691400] (dynamixel_sdk_examples) JobProgress: {'identifier': 'dynamixel_sdk_examples', 'progress': 'build'}
+[14.691968] (dynamixel_sdk_examples) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_examples', '--', '-j8', '-l8'], 'cwd': '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_examples', 'env': OrderedDict([('HOSTNAME', 'envy-13'), ('IGNITION_VERSION', 'fortress'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/lib:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ros'), ('OLDPWD', '/home/ros/turtlebot3'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3-2.1.5/install:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('RUNLEVEL', '3'), ('XDG_RUNTIME_DIR', '/tmp/runtime-ros'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('AMENT_PREFIX_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble'), ('PWD', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_examples'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble')]), 'shell': False}
+[14.773050] (dynamixel_sdk_examples) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/read_write_node.dir/src/read_write_node.cpp.o\x1b[0m\n'}
+[14.773703] (-) TimerEvent: {}
+[14.874051] (-) TimerEvent: {}
+[14.974466] (-) TimerEvent: {}
+[15.074861] (-) TimerEvent: {}
+[15.175235] (-) TimerEvent: {}
+[15.275674] (-) TimerEvent: {}
+[15.376152] (-) TimerEvent: {}
+[15.476597] (-) TimerEvent: {}
+[15.577088] (-) TimerEvent: {}
+[15.677635] (-) TimerEvent: {}
+[15.778161] (-) TimerEvent: {}
+[15.878704] (-) TimerEvent: {}
+[15.979222] (-) TimerEvent: {}
+[16.079790] (-) TimerEvent: {}
+[16.180478] (-) TimerEvent: {}
+[16.280920] (-) TimerEvent: {}
+[16.381366] (-) TimerEvent: {}
+[16.481927] (-) TimerEvent: {}
+[16.582472] (-) TimerEvent: {}
+[16.683012] (-) TimerEvent: {}
+[16.783474] (-) TimerEvent: {}
+[16.883869] (-) TimerEvent: {}
+[16.984257] (-) TimerEvent: {}
+[17.084677] (-) TimerEvent: {}
+[17.185097] (-) TimerEvent: {}
+[17.285488] (-) TimerEvent: {}
+[17.385893] (-) TimerEvent: {}
+[17.486247] (-) TimerEvent: {}
+[17.586846] (-) TimerEvent: {}
+[17.687259] (-) TimerEvent: {}
+[17.787660] (-) TimerEvent: {}
+[17.888051] (-) TimerEvent: {}
+[17.988434] (-) TimerEvent: {}
+[18.088833] (-) TimerEvent: {}
+[18.189182] (-) TimerEvent: {}
+[18.289529] (-) TimerEvent: {}
+[18.389870] (-) TimerEvent: {}
+[18.490297] (-) TimerEvent: {}
+[18.590718] (-) TimerEvent: {}
+[18.691120] (-) TimerEvent: {}
+[18.791627] (-) TimerEvent: {}
+[18.892012] (-) TimerEvent: {}
+[18.992336] (-) TimerEvent: {}
+[19.092679] (-) TimerEvent: {}
+[19.193105] (-) TimerEvent: {}
+[19.293489] (-) TimerEvent: {}
+[19.393883] (-) TimerEvent: {}
+[19.494395] (-) TimerEvent: {}
+[19.594866] (-) TimerEvent: {}
+[19.695218] (-) TimerEvent: {}
+[19.795573] (-) TimerEvent: {}
+[19.895910] (-) TimerEvent: {}
+[19.996254] (-) TimerEvent: {}
+[20.096595] (-) TimerEvent: {}
+[20.196960] (-) TimerEvent: {}
+[20.297306] (-) TimerEvent: {}
+[20.397656] (-) TimerEvent: {}
+[20.498001] (-) TimerEvent: {}
+[20.598348] (-) TimerEvent: {}
+[20.698706] (-) TimerEvent: {}
+[20.799055] (-) TimerEvent: {}
+[20.899419] (-) TimerEvent: {}
+[20.999833] (-) TimerEvent: {}
+[21.100221] (-) TimerEvent: {}
+[21.200573] (-) TimerEvent: {}
+[21.300962] (-) TimerEvent: {}
+[21.401386] (-) TimerEvent: {}
+[21.501794] (-) TimerEvent: {}
+[21.602168] (-) TimerEvent: {}
+[21.702575] (-) TimerEvent: {}
+[21.803006] (-) TimerEvent: {}
+[21.903429] (-) TimerEvent: {}
+[22.003832] (-) TimerEvent: {}
+[22.104200] (-) TimerEvent: {}
+[22.204555] (-) TimerEvent: {}
+[22.304978] (-) TimerEvent: {}
+[22.405414] (-) TimerEvent: {}
+[22.505758] (-) TimerEvent: {}
+[22.606165] (-) TimerEvent: {}
+[22.706567] (-) TimerEvent: {}
+[22.806931] (-) TimerEvent: {}
+[22.907288] (-) TimerEvent: {}
+[23.007624] (-) TimerEvent: {}
+[23.107959] (-) TimerEvent: {}
+[23.208263] (-) TimerEvent: {}
+[23.308651] (-) TimerEvent: {}
+[23.409034] (-) TimerEvent: {}
+[23.509407] (-) TimerEvent: {}
+[23.609751] (-) TimerEvent: {}
+[23.710155] (-) TimerEvent: {}
+[23.810503] (-) TimerEvent: {}
+[23.910850] (-) TimerEvent: {}
+[24.011199] (-) TimerEvent: {}
+[24.111515] (-) TimerEvent: {}
+[24.211834] (-) TimerEvent: {}
+[24.312227] (-) TimerEvent: {}
+[24.412616] (-) TimerEvent: {}
+[24.513006] (-) TimerEvent: {}
+[24.613387] (-) TimerEvent: {}
+[24.713753] (-) TimerEvent: {}
+[24.814168] (-) TimerEvent: {}
+[24.914546] (-) TimerEvent: {}
+[25.014901] (-) TimerEvent: {}
+[25.115261] (-) TimerEvent: {}
+[25.215594] (-) TimerEvent: {}
+[25.315943] (-) TimerEvent: {}
+[25.416309] (-) TimerEvent: {}
+[25.516707] (-) TimerEvent: {}
+[25.617051] (-) TimerEvent: {}
+[25.717363] (-) TimerEvent: {}
+[25.817686] (-) TimerEvent: {}
+[25.918053] (-) TimerEvent: {}
+[26.018398] (-) TimerEvent: {}
+[26.118742] (-) TimerEvent: {}
+[26.219062] (-) TimerEvent: {}
+[26.319417] (-) TimerEvent: {}
+[26.419775] (-) TimerEvent: {}
+[26.520168] (-) TimerEvent: {}
+[26.620529] (-) TimerEvent: {}
+[26.720955] (-) TimerEvent: {}
+[26.821346] (-) TimerEvent: {}
+[26.921694] (-) TimerEvent: {}
+[27.022058] (-) TimerEvent: {}
+[27.122439] (-) TimerEvent: {}
+[27.222888] (-) TimerEvent: {}
+[27.323260] (-) TimerEvent: {}
+[27.423633] (-) TimerEvent: {}
+[27.524008] (-) TimerEvent: {}
+[27.624411] (-) TimerEvent: {}
+[27.724842] (-) TimerEvent: {}
+[27.784057] (dynamixel_sdk_examples) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable read_write_node\x1b[0m\n'}
+[27.824948] (-) TimerEvent: {}
+[27.925308] (-) TimerEvent: {}
+[28.025716] (-) TimerEvent: {}
+[28.126175] (-) TimerEvent: {}
+[28.226650] (-) TimerEvent: {}
+[28.327182] (-) TimerEvent: {}
+[28.427875] (-) TimerEvent: {}
+[28.434779] (dynamixel_sdk_examples) StdoutLine: {'line': b'[100%] Built target read_write_node\n'}
+[28.450312] (dynamixel_sdk_examples) CommandEnded: {'returncode': 0}
+[28.488707] (dynamixel_sdk_examples) JobProgress: {'identifier': 'dynamixel_sdk_examples', 'progress': 'install'}
+[28.489344] (dynamixel_sdk_examples) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_examples'], 'cwd': '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_examples', 'env': OrderedDict([('HOSTNAME', 'envy-13'), ('IGNITION_VERSION', 'fortress'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/lib:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk/lib:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ros'), ('OLDPWD', '/home/ros/turtlebot3'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/home/ros/turtlebot3/turtlebot3-2.1.5/install:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('RUNLEVEL', '3'), ('XDG_RUNTIME_DIR', '/tmp/runtime-ros'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('AMENT_PREFIX_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble'), ('PWD', '/home/ros/turtlebot3/DynamixelSDK/build/dynamixel_sdk_examples'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_custom_interfaces:/home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_simulations:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_gazebo:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/turtlebot3_fake_node:/home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/turtlebot3_msgs:/opt/ros/humble')]), 'shell': False}
+[28.501607] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[28.502491] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[28.502891] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/lib/dynamixel_sdk_examples/read_write_node\n'}
+[28.515542] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/ament_index/resource_index/package_run_dependencies/dynamixel_sdk_examples\n'}
+[28.528051] (-) TimerEvent: {}
+[28.528950] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/ament_index/resource_index/parent_prefix_path/dynamixel_sdk_examples\n'}
+[28.542869] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/dynamixel_sdk_examples/environment/ament_prefix_path.sh\n'}
+[28.556187] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/dynamixel_sdk_examples/environment/ament_prefix_path.dsv\n'}
+[28.571350] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/dynamixel_sdk_examples/environment/path.sh\n'}
+[28.585136] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/dynamixel_sdk_examples/environment/path.dsv\n'}
+[28.599943] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/dynamixel_sdk_examples/local_setup.bash\n'}
+[28.613166] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/dynamixel_sdk_examples/local_setup.sh\n'}
+[28.626486] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/dynamixel_sdk_examples/local_setup.zsh\n'}
+[28.628212] (-) TimerEvent: {}
+[28.641554] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/dynamixel_sdk_examples/local_setup.dsv\n'}
+[28.654995] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/dynamixel_sdk_examples/package.dsv\n'}
+[28.671533] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/ament_index/resource_index/packages/dynamixel_sdk_examples\n'}
+[28.685243] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/dynamixel_sdk_examples/cmake/dynamixel_sdk_examplesConfig.cmake\n'}
+[28.700528] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/dynamixel_sdk_examples/cmake/dynamixel_sdk_examplesConfig-version.cmake\n'}
+[28.713583] (dynamixel_sdk_examples) StdoutLine: {'line': b'-- Symlinking: /home/ros/turtlebot3/DynamixelSDK/install/dynamixel_sdk_examples/share/dynamixel_sdk_examples/package.xml\n'}
+[28.728357] (-) TimerEvent: {}
+[28.731516] (dynamixel_sdk_examples) CommandEnded: {'returncode': 0}
+[28.828510] (-) TimerEvent: {}
+[28.928983] (-) TimerEvent: {}
+[28.949454] (dynamixel_sdk_examples) JobEnded: {'identifier': 'dynamixel_sdk_examples', 'rc': 0}
+[28.950939] (-) EventReactorShutdown: {}

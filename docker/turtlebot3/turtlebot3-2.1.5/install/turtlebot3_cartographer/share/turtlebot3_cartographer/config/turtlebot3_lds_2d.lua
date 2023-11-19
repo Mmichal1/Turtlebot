@@ -1,0 +1,1 @@
+/home/ros/turtlebot3/turtlebot3-2.1.5/turtlebot3_cartographer/config/turtlebot3_lds_2d.lua

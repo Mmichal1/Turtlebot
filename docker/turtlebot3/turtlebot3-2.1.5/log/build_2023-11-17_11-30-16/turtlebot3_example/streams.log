@@ -1,0 +1,20 @@
+[1.591s] Invoking command in '/home/ros/turtlebot3/turtlebot3-2.1.5/build/turtlebot3_example': PYTHONPATH=/home/ros/turtlebot3/turtlebot3-2.1.5/build/turtlebot3_example/prefix_override:/home/ros/turtlebot3/turtlebot3-2.1.5/install/turtlebot3_example/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --editable --build-directory /home/ros/turtlebot3/turtlebot3-2.1.5/build/turtlebot3_example/build --no-deps install_data
+[1.859s] running develop
+[2.003s] running egg_info
+[2.003s] writing turtlebot3_example.egg-info/PKG-INFO
+[2.004s] writing dependency_links to turtlebot3_example.egg-info/dependency_links.txt
+[2.004s] writing entry points to turtlebot3_example.egg-info/entry_points.txt
+[2.004s] writing requirements to turtlebot3_example.egg-info/requires.txt
+[2.004s] writing top-level names to turtlebot3_example.egg-info/top_level.txt
+[2.007s] reading manifest file 'turtlebot3_example.egg-info/SOURCES.txt'
+[2.009s] writing manifest file 'turtlebot3_example.egg-info/SOURCES.txt'
+[2.010s] running build_ext
+[2.011s] Creating /home/ros/turtlebot3/turtlebot3-2.1.5/install/turtlebot3_example/lib/python3.10/site-packages/turtlebot3-example.egg-link (link to .)
+[2.012s] Installing turtlebot3_obstacle_detection script to /home/ros/turtlebot3/turtlebot3-2.1.5/install/turtlebot3_example/lib/turtlebot3_example
+[2.012s] Installing turtlebot3_patrol_client script to /home/ros/turtlebot3/turtlebot3-2.1.5/install/turtlebot3_example/lib/turtlebot3_example
+[2.012s] Installing turtlebot3_patrol_server script to /home/ros/turtlebot3/turtlebot3-2.1.5/install/turtlebot3_example/lib/turtlebot3_example
+[2.012s] Installing turtlebot3_position_control script to /home/ros/turtlebot3/turtlebot3-2.1.5/install/turtlebot3_example/lib/turtlebot3_example
+[2.012s] 
+[2.012s] Installed /home/ros/turtlebot3/turtlebot3-2.1.5/build/turtlebot3_example
+[2.013s] running install_data
+[2.059s] Invoked command in '/home/ros/turtlebot3/turtlebot3-2.1.5/build/turtlebot3_example' returned '0': PYTHONPATH=/home/ros/turtlebot3/turtlebot3-2.1.5/build/turtlebot3_example/prefix_override:/home/ros/turtlebot3/turtlebot3-2.1.5/install/turtlebot3_example/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --editable --build-directory /home/ros/turtlebot3/turtlebot3-2.1.5/build/turtlebot3_example/build --no-deps install_data
