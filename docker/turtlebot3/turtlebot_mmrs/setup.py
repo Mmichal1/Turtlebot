@@ -32,6 +32,8 @@ setup(
         'console_scripts': [
             'robot1_navigate = turtlebot_mmrs.robot1_navigate:main',
             'robot2_navigate = turtlebot_mmrs.robot2_navigate:main',
+            'robot1_follow_path = turtlebot_mmrs.robot1_follow_path:main',
+            'controller = turtlebot_mmrs.controller:main',
         ],
     },
 )

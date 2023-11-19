@@ -16,10 +16,12 @@
 from copy import deepcopy
 
 from geometry_msgs.msg import PoseStamped
+from nav_msgs.msg import Path
 from nav2_simple_commander.robot_navigator import BasicNavigator, TaskResult
 
 import rclpy
 from rclpy.duration import Duration
+from rclpy.node import Node
 
 
 """
@@ -28,10 +30,21 @@ is that there are security cameras mounted on the robots recording or being
 watched live by security staff.
 """
 
+class PathPublisher(Node):
+
+    def __init__(self):
+        super().__init__('path_publisher_node')
+        self.path_publisher = self.create_publisher(Path, 'robot1/computed_path', 10)
+
+    def publish_path(self, path: Path):
+        msg = path
+        self.path_publisher.publish(msg)
+        self.get_logger().info('Publishing path.')
 
 def main():
     rclpy.init()
 
+    path_publisher_node = PathPublisher
     navigator = BasicNavigator(namespace="robot1")
 
     # Security route, probably read in from a file for a real application
@@ -58,23 +71,25 @@ def main():
 
     # Wait for navigation to fully activate
     navigator.waitUntilNav2Active()
+    # Send our route
+    route_poses = []
+    pose = PoseStamped()
+    pose.header.frame_id = 'map'
+    pose.header.stamp = navigator.get_clock().now().to_msg()
+    pose.pose.orientation.w = 1.0
+    for pt in security_route:
+        pose.pose.position.x = pt[0]
+        pose.pose.position.y = pt[1]
+        route_poses.append(deepcopy(pose))
+
+    path = navigator.getPathThroughPoses(initial_pose, route_poses)
+    path_publisher_node.publish_path(path)
 
     # Do security route until dead
     while rclpy.ok():
-        # Send our route
-        route_poses = []
-        pose = PoseStamped()
-        pose.header.frame_id = 'map'
-        pose.header.stamp = navigator.get_clock().now().to_msg()
-        pose.pose.orientation.w = 1.0
-        for pt in security_route:
-            pose.pose.position.x = pt[0]
-            pose.pose.position.y = pt[1]
-            route_poses.append(deepcopy(pose))
+        
         navigator.goThroughPoses(route_poses)
 
-        # Do something during our route (e.x. AI detection on camera images for anomalies)
-        # Simply print ETA for the demonstation
         i = 0
         while not navigator.isTaskComplete():
             i += 1
@@ -88,6 +103,7 @@ def main():
                     )
                     + ' seconds.'
                 )
+                path_publisher_node.publish_path(path)
 
                 # Some failure mode, must stop since the robot is clearly stuck
                 if Duration.from_msg(feedback.navigation_time) > Duration(
@@ -99,7 +115,18 @@ def main():
         # If at end of route, reverse the route to restart
         security_route.reverse()
 
+        route_poses = []
+        pose = PoseStamped()
+        pose.header.frame_id = 'map'
+        pose.header.stamp = navigator.get_clock().now().to_msg()
+        pose.pose.orientation.w = 1.0
+        for pt in security_route:
+            pose.pose.position.x = pt[0]
+            pose.pose.position.y = pt[1]
+            route_poses.append(deepcopy(pose))
+
         result = navigator.getResult()
+        print(result)
         if result == TaskResult.SUCCEEDED:
             print('Route complete! Restarting...')
         elif result == TaskResult.CANCELED:
