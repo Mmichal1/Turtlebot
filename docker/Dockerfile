@@ -4,8 +4,11 @@ RUN apt-get update && apt-get -y upgrade \
     && apt-get install -y \
     vim \
     software-properties-common \
+    python3-pip \
     && add-apt-repository universe \
     && rm -rf /var/lib/apt/lists/*
+
+RUN pip install setuptools==58.2.0
 
 RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg \
     && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
@@ -48,8 +51,13 @@ COPY docker/entrypoint.sh /entrypoint.sh
 COPY docker/bashrc /home/${USERNAME}/.bashrc
 
 
+
+WORKDIR /home/ros/turtlebot3/turtlebot_mmrs
+
+RUN colcon build --symlink-install
+
 # Set up entrypoint and default command
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
 CMD ["bash"]
 
-WORKDIR /home/ros/turtlebot3
+RUN export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/ros/turtlebot3/turtlebot_mmrs/models

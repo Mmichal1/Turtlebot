@@ -1,12 +1,8 @@
 source /opt/ros/humble/setup.bash
 source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
-source /home/ros/turtlebot3/DynamixelSDK/install/setup.bash 
-source /home/ros/turtlebot3/turtlebot3_simulations-2.2.5/install/setup.bash 
-source /home/ros/turtlebot3/turtlebot3_msgs-2.2.3/install/setup.bash 
-source /home/ros/turtlebot3/turtlebot3-2.1.5/install/setup.bash
-source /home/ros/turtlebot3/nav2_bringup/install/setup.bash
+source /home/ros/turtlebot3/turtlebot_mmrs/install/setup.bash
 export XDG_RUNTIME_DIR=/tmp/runtime-ros
 export RUNLEVEL=3
 export IGNITION_VERSION=fortress
 export TURTLEBOT3_MODEL=waffle
-export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/ros/turtlebot3/turtlebot3_simulations-2.2.5/turtlebot3_gazebo/models
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/ros/turtlebot3/turtlebot_mmrs/models

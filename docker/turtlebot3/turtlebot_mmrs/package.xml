@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>turtlebot_mmrs</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="mmichal.trela@gmail.com">ros</maintainer>
+  <license>TODO: License declaration</license>
+
+  <!-- Python build tool -->
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <!-- Python dependencies -->
+  <depend>rclpy</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <!-- Add other ROS dependencies as needed -->
+
+  <!-- Include your existing dependencies -->
+  <depend>navigation2</depend>
+  <depend>nav2_common</depend>
+  <depend>launch_ros</depend>
+  <depend>slam_toolbox</depend>
+
+  <!-- Testing dependencies -->
+  <test_depend>ament_lint_common</test_depend>
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>ament_cmake_pytest</test_depend>
+  <test_depend>launch_testing</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
