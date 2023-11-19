@@ -47,8 +47,6 @@ def generate_launch_description():
     use_simulator = LaunchConfiguration('use_simulator')
     use_robot_state_pub = LaunchConfiguration('use_robot_state_pub')
     use_rviz = LaunchConfiguration('use_rviz')
-    headless = LaunchConfiguration('headless')
-    world = LaunchConfiguration('world')
     pose = {'x': LaunchConfiguration('x_pose', default='-2.00'),
             'y': LaunchConfiguration('y_pose', default='-0.50'),
             'z': LaunchConfiguration('z_pose', default='0.01'),
@@ -132,20 +130,6 @@ def generate_launch_description():
         default_value='True',
         description='Whether to start RVIZ')
 
-    declare_simulator_cmd = DeclareLaunchArgument(
-        'headless',
-        default_value='True',
-        description='Whether to execute gzclient)')
-
-    declare_world_cmd = DeclareLaunchArgument(
-        'world',
-        # TODO(orduno) Switch back once ROS argument passing has been fixed upstream
-        #              https://github.com/ROBOTIS-GIT/turtlebot3_simulations/issues/91
-        # default_value=os.path.join(get_package_share_directory('turtlebot3_gazebo'),
-        # worlds/turtlebot3_worlds/waffle.model')
-        # default_value=os.path.join(bringup_dir, 'worlds', 'empty_world.world'),
-        default_value=os.path.join(bringup_dir, 'worlds', 'world_only.model'),
-        description='Full path to world model file to load')
 
     declare_robot_name_cmd = DeclareLaunchArgument(
         'robot_name',
@@ -156,19 +140,6 @@ def generate_launch_description():
         'robot_sdf',
         default_value=os.path.join(bringup_dir, 'worlds', 'waffle.model'),
         description='Full path to robot sdf file to spawn the robot in gazebo')
-
-    # Specify the actions
-    start_gazebo_server_cmd = ExecuteProcess(
-        condition=IfCondition(use_simulator),
-        cmd=['gzserver', '-s', 'libgazebo_ros_init.so',
-             '-s', 'libgazebo_ros_factory.so', world],
-        cwd=[launch_dir], output='screen')
-
-    start_gazebo_client_cmd = ExecuteProcess(
-        condition=IfCondition(PythonExpression(
-            [use_simulator, ' and not ', headless])),
-        cmd=['gzclient'],
-        cwd=[launch_dir], output='screen')
 
     urdf = os.path.join(bringup_dir, 'urdf', 'turtlebot3_waffle.urdf')
     with open(urdf, 'r') as infp:
@@ -234,15 +205,11 @@ def generate_launch_description():
     ld.add_action(declare_use_simulator_cmd)
     ld.add_action(declare_use_robot_state_pub_cmd)
     ld.add_action(declare_use_rviz_cmd)
-    ld.add_action(declare_simulator_cmd)
-    ld.add_action(declare_world_cmd)
     ld.add_action(declare_robot_name_cmd)
     ld.add_action(declare_robot_sdf_cmd)
     ld.add_action(declare_use_respawn_cmd)
 
     # Add any conditioned actions
-    ld.add_action(start_gazebo_server_cmd)
-    ld.add_action(start_gazebo_client_cmd)
     ld.add_action(start_gazebo_spawner_cmd)
 
     # Add the actions to launch all of the navigation nodes

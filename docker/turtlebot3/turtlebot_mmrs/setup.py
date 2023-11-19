@@ -30,6 +30,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'robot1_navigate = turtlebot_mmrs.robot1_navigate:main',
+            'robot2_navigate = turtlebot_mmrs.robot2_navigate:main',
         ],
     },
 )

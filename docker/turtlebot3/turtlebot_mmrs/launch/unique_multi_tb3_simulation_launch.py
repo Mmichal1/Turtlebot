@@ -39,10 +39,10 @@ def generate_launch_description():
 
     # Names and poses of the robots
     robots = [
-        {'name': 'robot1', 'x_pose': 0.0, 'y_pose': 0.5, 'z_pose': 0.01,
+        {'name': 'robot1', 'x_pose': -1.5, 'y_pose': 1.5, 'z_pose': 0.01,
                            'roll': 0.0, 'pitch': 0.0, 'yaw': 0.0},
-        {'name': 'robot2', 'x_pose': 0.0, 'y_pose': -0.5, 'z_pose': 0.01,
-                           'roll': 0.0, 'pitch': 0.0, 'yaw': 0.0}]
+        {'name': 'robot2', 'x_pose': 1.5, 'y_pose': -1.5, 'z_pose': 0.01,
+                           'roll': 0.0, 'pitch': 0.0, 'yaw': 3.1416}]
 
     # Simulation settings
     world = LaunchConfiguration('world')
@@ -65,8 +65,8 @@ def generate_launch_description():
 
     declare_simulator_cmd = DeclareLaunchArgument(
         'simulator',
-        default_value='gazebo',
-        description='The simulator to use (gazebo or gzserver)')
+        default_value='gzserver',
+        description='The simulator to use (gazebo or gzserver for headless)')
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
@@ -135,7 +135,7 @@ def generate_launch_description():
                                   'autostart': autostart,
                                   'use_rviz': 'False',
                                   'use_simulator': 'False',
-                                  'headless': 'False',
+                                  'headless': 'True',
                                   'use_robot_state_pub': use_robot_state_pub,
                                   'x_pose': TextSubstitution(text=str(robot['x_pose'])),
                                   'y_pose': TextSubstitution(text=str(robot['y_pose'])),
