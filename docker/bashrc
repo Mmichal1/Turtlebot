@@ -1,8 +1,7 @@
 source /opt/ros/humble/setup.bash
 source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
-source /home/ros/turtlebot3/turtlebot_mmrs/install/setup.bash
+source /home/ros/turtlebot3/install/setup.bash
 export XDG_RUNTIME_DIR=/tmp/runtime-ros
 export RUNLEVEL=3
 export IGNITION_VERSION=fortress
 export TURTLEBOT3_MODEL=waffle
-export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/ros/turtlebot3/turtlebot_mmrs/models

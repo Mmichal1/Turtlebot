@@ -16,7 +16,6 @@ RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o 
 RUN sudo sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list' \
 && curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 
-# Installing ROS2 packages
 RUN apt-get update \
     && apt-get install -y \
     ament-cmake \
@@ -31,7 +30,6 @@ RUN apt-get update \
 
 RUN rosdep update
 
-# Create a non-root user
 ARG USERNAME=ros
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -40,7 +38,6 @@ RUN groupadd --gid $USER_GID $USERNAME \
   && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
   && mkdir /home/$USERNAME/.config && chown $USER_UID:$USER_GID /home/$USERNAME/.config
 
-# Set up sudo
 RUN apt-get update \
   && apt-get install -y sudo \
   && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME\
@@ -52,12 +49,9 @@ COPY docker/bashrc /home/${USERNAME}/.bashrc
 
 
 
-WORKDIR /home/ros/turtlebot3/turtlebot_mmrs
+WORKDIR /home/ros/turtlebot3/
 
 RUN colcon build --symlink-install
 
-# Set up entrypoint and default command
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
 CMD ["bash"]
-
-RUN export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/ros/turtlebot3/turtlebot_mmrs/models
