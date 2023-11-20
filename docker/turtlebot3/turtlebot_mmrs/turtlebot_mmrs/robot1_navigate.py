@@ -13,21 +13,28 @@ from rclpy.duration import Duration
 def main():
     rclpy.init()
 
-    navigator = BasicNavigator(namespace='robot1')
-    path_collision_service_client = PathCollisionServiceClient(namespace='robot1')
+    navigator = BasicNavigator(namespace="robot1")
+    path_collision_service_client = PathCollisionServiceClient(
+        namespace="robot1"
+    )
 
     # Security route, probably read in from a file for a real application
     # from either a map or drive and repeat.
+    # security_route = [
+    #     [-0.5, 1.5],
+    #     [1.5, 1.5],
+    #     [1.5, -0.5],
+    #     [-0.5, -0.5],
+    # ]
+
     security_route = [
-        [-0.5, 1.5],
-        [1.5, 1.5],
-        [1.5, -0.5],
-        [-0.5, -0.5],
+        [-1.5, 0.0],
+        [1.5, 0.0],
     ]
 
     # Set our demo's initial pose
     initial_pose = PoseStamped()
-    initial_pose.header.frame_id = 'map'
+    initial_pose.header.frame_id = "map"
     initial_pose.header.stamp = navigator.get_clock().now().to_msg()
     initial_pose.pose.position.x = -1.5
     initial_pose.pose.position.y = 1.5
@@ -43,7 +50,7 @@ def main():
     # Send our route
     route_poses = []
     pose = PoseStamped()
-    pose.header.frame_id = 'map'
+    pose.header.frame_id = "map"
     pose.header.stamp = navigator.get_clock().now().to_msg()
     pose.pose.orientation.w = 1.0
     for pt in security_route:
@@ -59,14 +66,17 @@ def main():
             try:
                 response = path_collision_service_client.future.result()
             except Exception as e:
-                path_collision_service_client.get_logger().info('Service call failed %r' % (e,))
+                path_collision_service_client.get_logger().info(
+                    "Service call failed %r" % (e,)
+                )
             else:
-                path_collision_service_client.get_logger().info('Success: %r' % (response.success,))
+                path_collision_service_client.get_logger().info(
+                    "Success: %r" % (response.success,)
+                )
             break
 
     # Do security route until dead
     while rclpy.ok():
-        
         navigator.goThroughPoses(route_poses)
 
         i = 0
@@ -75,19 +85,24 @@ def main():
             feedback = navigator.getFeedback()
             if feedback and i % 5 == 0:
                 print(
-                    'Estimated time to complete current route: '
-                    + '{0:.0f}'.format(
-                        Duration.from_msg(feedback.estimated_time_remaining).nanoseconds
+                    "Estimated time to complete current route: "
+                    + "{0:.0f}".format(
+                        Duration.from_msg(
+                            feedback.estimated_time_remaining
+                        ).nanoseconds
                         / 1e9
                     )
-                    + ' seconds.'
+                    + " seconds."
                 )
 
                 # Some failure mode, must stop since the robot is clearly stuck
                 if Duration.from_msg(feedback.navigation_time) > Duration(
                     seconds=180.0
                 ):
-                    print('Navigation has exceeded timeout of 180s, canceling request.')
+                    print(
+                        "Navigation has exceeded timeout of 180s, canceling"
+                        " request."
+                    )
                     navigator.cancelTask()
 
         # If at end of route, reverse the route to restart
@@ -95,7 +110,7 @@ def main():
 
         route_poses = []
         pose = PoseStamped()
-        pose.header.frame_id = 'map'
+        pose.header.frame_id = "map"
         pose.header.stamp = navigator.get_clock().now().to_msg()
         pose.pose.orientation.w = 1.0
         for pt in security_route:
@@ -106,15 +121,15 @@ def main():
         result = navigator.getResult()
         print(result)
         if result == TaskResult.SUCCEEDED:
-            print('Route complete! Restarting...')
+            print("Route complete! Restarting...")
         elif result == TaskResult.CANCELED:
-            print('Security route was canceled, exiting.')
+            print("Security route was canceled, exiting.")
             exit(1)
         elif result == TaskResult.FAILED:
-            print('Security route failed! Restarting from other side...')
+            print("Security route failed! Restarting from other side...")
 
     exit(0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
