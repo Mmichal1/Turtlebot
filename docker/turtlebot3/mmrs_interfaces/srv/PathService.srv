@@ -1,3 +1,8 @@
+# PathService.srv
+
+# Request part
+string robot_id
 nav_msgs/Path path
 ---
-bool success
+# Response part
+mmrs_interfaces/TriggerPose[] trigger_poses

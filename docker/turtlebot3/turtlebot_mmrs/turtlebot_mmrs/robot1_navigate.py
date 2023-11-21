@@ -27,17 +27,22 @@ def main():
     #     [-0.5, -0.5],
     # ]
 
+    # security_route = [
+    #     [-1.5, 0.0],
+    #     [1.5, 0.0],
+    # ]
+
     security_route = [
-        [-1.5, 0.0],
-        [1.5, 0.0],
+        [-1.8, 1.8],
+        [1.8, -1.8],
     ]
 
     # Set our demo's initial pose
     initial_pose = PoseStamped()
     initial_pose.header.frame_id = "map"
     initial_pose.header.stamp = navigator.get_clock().now().to_msg()
-    initial_pose.pose.position.x = -1.5
-    initial_pose.pose.position.y = 1.5
+    initial_pose.pose.position.x = -1.8
+    initial_pose.pose.position.y = 1.8
     initial_pose.pose.position.z = 0.01
     initial_pose.pose.orientation.x = 0.0
     initial_pose.pose.orientation.y = 0.0
@@ -71,9 +76,9 @@ def main():
                 )
             else:
                 path_collision_service_client.get_logger().info(
-                    "Success: %r" % (response.success,)
+                    "Success: %r" % (response.trigger_poses,)
                 )
-            break
+                break
 
     # Do security route until dead
     while rclpy.ok():
@@ -84,16 +89,6 @@ def main():
             i += 1
             feedback = navigator.getFeedback()
             if feedback and i % 5 == 0:
-                print(
-                    "Estimated time to complete current route: "
-                    + "{0:.0f}".format(
-                        Duration.from_msg(
-                            feedback.estimated_time_remaining
-                        ).nanoseconds
-                        / 1e9
-                    )
-                    + " seconds."
-                )
 
                 # Some failure mode, must stop since the robot is clearly stuck
                 if Duration.from_msg(feedback.navigation_time) > Duration(
@@ -119,7 +114,6 @@ def main():
             route_poses.append(deepcopy(pose))
 
         result = navigator.getResult()
-        print(result)
         if result == TaskResult.SUCCEEDED:
             print("Route complete! Restarting...")
         elif result == TaskResult.CANCELED:

@@ -36,7 +36,7 @@ def main():
     initial_pose = PoseStamped()
     initial_pose.header.frame_id = "map"
     initial_pose.header.stamp = navigator.get_clock().now().to_msg()
-    initial_pose.pose.position.x = 1.5
+    initial_pose.pose.position.x = 0.0
     initial_pose.pose.position.y = -1.5
     initial_pose.pose.position.z = 0.01
     initial_pose.pose.orientation.x = 0.0
@@ -71,31 +71,19 @@ def main():
                 )
             else:
                 path_collision_service_client.get_logger().info(
-                    "Success: %r" % (response.success,)
+                    "Success: %r" % (response.trigger_poses,)
                 )
-            break
+                break
 
     # Do security route until dead
     while rclpy.ok():
         navigator.goThroughPoses(route_poses)
 
-        # Do something during our route (e.x. AI detection on camera images for anomalies)
-        # Simply print ETA for the demonstation
         i = 0
         while not navigator.isTaskComplete():
             i += 1
             feedback = navigator.getFeedback()
             if feedback and i % 5 == 0:
-                print(
-                    "Estimated time to complete current route: "
-                    + "{0:.0f}".format(
-                        Duration.from_msg(
-                            feedback.estimated_time_remaining
-                        ).nanoseconds
-                        / 1e9
-                    )
-                    + " seconds."
-                )
 
                 # Some failure mode, must stop since the robot is clearly stuck
                 if Duration.from_msg(feedback.navigation_time) > Duration(
@@ -110,7 +98,6 @@ def main():
         # If at end of route, reverse the route to restart
         security_route.reverse()
 
-        # Send our route
         route_poses = []
         pose = PoseStamped()
         pose.header.frame_id = "map"
