@@ -1,0 +1,11 @@
+# PathProcessing.action
+
+# Request
+string robot_id
+nav_msgs/Path path
+---
+# Response  
+bool succeeded
+---
+# Feedback
+mmrs_interfaces/TriggerPose[] trigger_poses

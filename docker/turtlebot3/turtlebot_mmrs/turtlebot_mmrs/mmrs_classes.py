@@ -6,10 +6,13 @@ from shapely.geometry import LineString, Point
 
 from enum import Enum, unique
 from nav_msgs.msg import Path
+from action_msgs.msg import GoalStatus
 from rclpy.node import Node
+from rclpy.action import ActionServer, ActionClient
 from rclpy.duration import Duration
 from mmrs_interfaces.srv import PathService
 from mmrs_interfaces.msg import TriggerPose
+from mmrs_interfaces.action import PathProcessing
 
 
 @unique
@@ -18,39 +21,49 @@ class TriggerType(Enum):
     STOP_TRIGGER = 0.4
 
 
-class PathCollisionServiceServer(Node):
+class PathProcessingActionServer(Node):
     def __init__(self):
-        super().__init__("path_collision_service_server")
-        self.service = self.create_service(
-            PathService, "path_collision_service", self.path_service_callback
+        super().__init__("path_processing_action_server")
+        self._action_server = ActionServer(
+            self, PathProcessing, "path_processing", self.path_service_callback
         )
         self.robot_paths: Dict[str, Path] = {}
         self.trigger_poses: Dict[str, List[TriggerPose]] = {}
         self.restricted_segments: Dict[str, LineString] = {}
-        self.timeout_duration = Duration(seconds=5)  # Timeout of 5 seconds
+        self.goal_handles = {}
 
-    def path_service_callback(self, request, response):
-        self.get_logger().info(f"Received path from {request.robot_id}")
-        other_robot_id = "robot2" if request.robot_id == "robot1" else "robot1"
+    def path_service_callback(self, goal_handle):
+        robot_id = goal_handle.request.robot_id
+        path = goal_handle.request.path
 
-        # Store the path from each client
-        self.robot_paths[request.robot_id] = (
-            self.convert_path_to_list_of_points(request.path)
-        )
+        self.get_logger().info(f"Received path from {robot_id}")
 
-        # Wait for the second path with a timeout
-        start_time = self.get_clock().now()
-        while other_robot_id not in self.robot_paths:
-            if (self.get_clock().now() - start_time) > self.timeout_duration:
-                break
-            rclpy.spin_once(self, timeout_sec=0.1)
+        self.robot_paths[robot_id] = self.convert_path_to_list_of_points(path)
+        self.goal_handles[robot_id] = goal_handle
 
-        if other_robot_id in self.robot_paths:
+        # Check if paths from both robots are received
+        if "robot1" in self.robot_paths and "robot2" in self.robot_paths:
+            self.get_logger().info("Both paths received, processing...")
+
             self.process_paths()
 
-        response.trigger_poses = self.trigger_poses[request.robot_id]
+            for robot_id, goal_handle in self.goal_handles.items():
+                feedbeck = PathProcessing.Feedback()
+                result = PathProcessing.Result()
+                feedbeck.trigger_poses = self.trigger_poses[robot_id]
+                result.succeeded = True
+                goal_handle.publish_feedback(feedbeck)
+                goal_handle.succeed()
+                return result
 
-        return response
+            # Clear stored paths and goal handles after processing
+            self.robot_paths.clear()
+            self.goal_handles.clear()
+
+        result = PathProcessing.Result()
+        result.succeeded = False
+        goal_handle.canceled()
+        return result
 
     def process_paths(self):
         self.determine_restricted_segments(self.robot_paths, threshold=0.5)
@@ -227,17 +240,54 @@ class PathCollisionServiceServer(Node):
         ax.plot(x, y, color=color, linewidth=5)  # Plotting each LineString
 
 
-class PathCollisionServiceClient(Node):
+class PathProcessingActionClient(Node):
     def __init__(self, namespace: str):
         super().__init__(f"{namespace}")
         self.robot_id = namespace
-        self.client = self.create_client(PathService, "path_collision_service")
-        while not self.client.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info("Waiting for service...")
-        self.req = PathService.Request()
+        self._action_client = ActionClient(
+            self, PathProcessing, "path_processing"
+        )
+        self.last_path = None
+        self.last_robot_id = None
 
-    def send_request(self, path_to_send):
-        self.req.robot_id = self.robot_id
-        self.req.path = path_to_send
+    def send_goal(self, robot_id: str, path: Path):
+        self.last_path = path
+        self.last_robot_id = robot_id
 
-        self.future = self.client.call_async(self.req)
+        goal_msg = PathProcessing.Goal()
+        goal_msg.robot_id = robot_id
+        goal_msg.path = path
+
+        self._action_client.wait_for_server()
+        self._send_goal_future = self._action_client.send_goal_async(
+            goal_msg, feedback_callback=self.feedback_callback
+        )
+        self._send_goal_future.add_done_callback(self.goal_response_callback)
+
+    def goal_response_callback(self, future):
+        goal_handle = future.result()
+        if not goal_handle.accepted:
+            self.get_logger().info("Goal rejected")
+            return
+
+        self.get_logger().info("Goal accepted, waiting for the result")
+        self._get_result_future = goal_handle.get_result_async()
+        self._get_result_future.add_done_callback(self.get_result_callback)
+
+    def get_result_callback(self, future):
+        goal_status = future.result().status
+        if goal_status == GoalStatus.STATUS_SUCCEEDED:
+            self.get_logger().info("Goal succeeded!")
+            # Process successful result
+            # ...
+        elif goal_status == GoalStatus.STATUS_ABORTED:
+            self.get_logger().info("Goal aborted by the server")
+        elif goal_status == GoalStatus.STATUS_CANCELED:
+            self.get_logger().info("Goal was canceled, resending the goal.")
+            # Resend the goal
+            self.send_goal(self.last_path, self.last_robot_id)
+        # Handle the received result here
+
+    def feedback_callback(self, feedback_msg):
+        # Handle any feedback here, if provided by the server
+        pass
