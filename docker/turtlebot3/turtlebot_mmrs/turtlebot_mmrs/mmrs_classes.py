@@ -82,21 +82,28 @@ class PathCollisionServiceServer(Node):
             (2.3, 2.3),
         ]
 
-        path1_restricted_segment, path2_restricted_segment = (
-            self.determine_restricted_segments(
-                robot1_path, robot2_path, threshold=0.5
-            )
-        )
-        robot1_triggers = self.find_trigger_points(
-            robot1_path, path1_restricted_segment, trigger_distance=0.5
-        )  # Set trigger distance
-        robot2_triggers = self.find_trigger_points(
-            robot2_path, path2_restricted_segment, trigger_distance=0.5
-        )  # Set trigger distance
+        # path1_restricted_segment, path2_restricted_segment = (
+        #     self.determine_restricted_segments(
+        #         robot1_path, robot2_path, threshold=0.5
+        #     )
+        # )
+        # robot1_triggers_a = self.find_trigger_points(
+        #     robot1_path, path1_restricted_segment, trigger_distance=0.8
+        # )  # Set trigger distance
+        # robot2_triggers_a = self.find_trigger_points(
+        #     robot2_path, path2_restricted_segment, trigger_distance=0.8
+        # )  # Set trigger distance
+
+        # robot1_triggers_b = self.find_trigger_points(
+        #     robot1_path, path1_restricted_segment, trigger_distance=0.5
+        # )  # Set trigger distance
+        # robot2_triggers_b = self.find_trigger_points(
+        #     robot2_path, path2_restricted_segment, trigger_distance=0.5
+        # )  # Set trigger distance
 
         wall_x, wall_y = zip(*wall_coords)
 
-        # Plotting
+        # # Plotting
         fig, ax = plt.subplots(figsize=(8, 8))
         ax.plot(
             wall_x,
@@ -106,12 +113,14 @@ class PathCollisionServiceServer(Node):
             linewidth=5,
         )
 
-        self.plot_shapely_points(robot1_path, ax)
-        self.plot_shapely_points(robot2_path, ax)
-        self.scatter_shapely_points(robot1_triggers, ax)
-        self.scatter_shapely_points(robot2_triggers, ax)
-        self.plot_shapely_linestring(path1_restricted_segment, ax)
-        self.plot_shapely_linestring(path2_restricted_segment, ax)
+        self.plot_shapely_points(robot1_path, ax, "blue")
+        self.plot_shapely_points(robot2_path, ax, "green")
+        # self.scatter_shapely_points(robot1_triggers_a, ax, "gold")
+        # self.scatter_shapely_points(robot2_triggers_a, ax, "gold")
+        # self.scatter_shapely_points(robot1_triggers_b, ax, "orange")
+        # self.scatter_shapely_points(robot2_triggers_b, ax, "orange")
+        # self.plot_shapely_linestring(path1_restricted_segment, ax)
+        # self.plot_shapely_linestring(path2_restricted_segment, ax)
 
         # Adding details to the plot
         ax.set_title("Paths of Robot 1 and Robot 2")
@@ -162,6 +171,8 @@ class PathCollisionServiceServer(Node):
         trigger_distance: float,
     ) -> List[Point]:
         trigger_points = []
+        start_point = Point(restricted_segment.coords[0])
+        end_point = Point(restricted_segment.coords[-1])
 
         points_not_on_line = [
             point
@@ -173,38 +184,45 @@ class PathCollisionServiceServer(Node):
         if not points_not_on_line:
             return None
 
-        # Calculate distances from each point to the LineString
-        distances = [
-            restricted_segment.distance(point) for point in points_not_on_line
-        ]
-
-        # Find the point with the distance closest to the predefined distance
-        closest_distance = min(
-            distances, key=lambda x: abs(x - trigger_distance)
+        closest_to_start = min(
+            points_not_on_line,
+            key=lambda point: abs(
+                start_point.distance(point) - trigger_distance
+            ),
+            default=None,
         )
-        trigger_points.append(
-            points_not_on_line[distances.index(closest_distance)]
+        closest_to_end = min(
+            points_not_on_line,
+            key=lambda point: abs(
+                end_point.distance(point) - trigger_distance
+            ),
+            default=None,
         )
+        trigger_points.extend([closest_to_start, closest_to_end])
 
         return trigger_points
 
-    def plot_shapely_points(self, points: List[Point], ax: Axes) -> None:
+    def plot_shapely_points(
+        self, points: List[Point], ax: Axes, color
+    ) -> None:
         x_coords = [point.x for point in points]
         y_coords = [point.y for point in points]
 
-        ax.plot(x_coords, y_coords)
+        ax.plot(x_coords, y_coords, color=color)
 
-    def scatter_shapely_points(self, points: List[Point], ax: Axes) -> None:
+    def scatter_shapely_points(
+        self, points: List[Point], ax: Axes, color
+    ) -> None:
         x_coords = [point.x for point in points]
         y_coords = [point.y for point in points]
 
-        ax.scatter(x_coords, y_coords)
+        ax.scatter(x_coords, y_coords, color=color)
 
     def plot_shapely_linestring(
         self, linestring: LineString, ax: Axes
     ) -> None:
         x, y = linestring.xy
-        ax.plot(x, y)  # Plotting each LineString
+        ax.plot(x, y, linewidth=6, color="red")  # Plotting each LineString
 
 
 class PathCollisionServiceClient(Node):

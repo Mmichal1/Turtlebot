@@ -20,23 +20,23 @@ def main():
 
     # Security route, probably read in from a file for a real application
     # from either a map or drive and repeat.
-    # security_route = [
-    #     [0.5, -1.5],
-    #     [-1.5, -1.5],
-    #     [-1.5, 0.5],
-    #     [0.5, 0.5],
-    # ]
-
     security_route = [
-        [0.0, -1.5],
-        [0.0, 1.5],
+        [0.5, -1.5],
+        [-1.5, -1.5],
+        [-1.5, 0.5],
+        [0.5, 0.5],
     ]
+
+    # security_route = [
+    #     [1.8, -1.8],
+    #     [-1.8, 1.8],
+    # ]
 
     # Set our demo's initial pose
     initial_pose = PoseStamped()
     initial_pose.header.frame_id = "map"
     initial_pose.header.stamp = navigator.get_clock().now().to_msg()
-    initial_pose.pose.position.x = 1.5
+    initial_pose.pose.position.x = 0.5
     initial_pose.pose.position.y = -1.5
     initial_pose.pose.position.z = 0.01
     initial_pose.pose.orientation.x = 0.0
