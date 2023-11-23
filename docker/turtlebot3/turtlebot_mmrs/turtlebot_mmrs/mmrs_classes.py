@@ -1,22 +1,24 @@
-from typing import List, Dict, Tuple, Union
+from typing import List, Dict, Optional
+from dataclasses import dataclass
 import matplotlib.pyplot as plt
 import rclpy
 import time
 from matplotlib.pyplot import Axes
-from shapely.geometry import LineString, Point
+from shapely.geometry import MultiLineString, LineString, Point
 from itertools import combinations
 from enum import Enum, unique
 from rclpy.node import Node
+from rclpy.task import Future
 from nav_msgs.msg import Path
-from geometry_msgs.msg import Pose
+from geometry_msgs.msg import PoseWithCovarianceStamped
 from mmrs_interfaces.srv import PathService
 from mmrs_interfaces.msg import TriggerPose
 
 MAX_ATTEMPTS = 5
-RestrictedSegmentsDict = Dict[str, Dict[str, LineString]]
-TriggerPosesDict = Dict[str, List[TriggerPose]]
-RobotPathsDict = Dict[str, Path]
-RestrictedAreasDict = Dict[int, LineString]
+"""Determines the max amount of attempts to send path processing request 
+and get trigger data"""
+TRIGGER_DISTANCE_M = 1.0
+"""Determines how close the robot needs to be to the trigger to activate it."""
 
 
 @unique
@@ -25,14 +27,21 @@ class TriggerType(Enum):
     STOP_TRIGGER = 0.4
 
 
+@dataclass
+class TriggerData:
+    position: Point
+    trigger_type: TriggerType
+    restricted_area_id: int
+
+
 class PathCollisionServiceServer(Node):
     def __init__(self):
         super().__init__("path_collision_service_server")
         self._define_service()
-        self.robot_paths: RobotPathsDict = {}
-        self.trigger_poses: TriggerPosesDict = {}
-        self.restricted_segments_on_path: RestrictedSegmentsDict = {}
-        self.restricted_areas: RestrictedAreasDict = {}
+        self.robot_paths: Dict[str, List[Point]] = {}
+        self.trigger_poses: Dict[str, List[TriggerPose]] = {}
+        self.restricted_segments_on_path: Dict[str, Dict[str, LineString]] = {}
+        self.restricted_areas: Dict[int, MultiLineString] = {}
 
     def _define_service(self):
         self.service = self.create_service(
@@ -59,8 +68,13 @@ class PathCollisionServiceServer(Node):
         if "robot1" and "robot2" in self.robot_paths:
             self.process_paths()
 
-        if request.robot_id in self.trigger_poses:
+        if (
+            request.robot_id in self.trigger_poses
+            and self.trigger_poses[request.robot_id]
+        ):
             response.trigger_poses = self.trigger_poses[request.robot_id]
+            self.get_logger().info(f"{response.trigger_poses}")
+            self.visualize_data()
         else:
             response.trigger_poses = []
 
@@ -220,15 +234,41 @@ class PathCollisionServiceServer(Node):
             [trigger_pose_start, trigger_pose_end]
         )
 
+    def visualize_data(self):
+        fig, ax = plt.subplots()
+
+        for _, path in self.robot_paths.items():
+            x, y = zip(*[(point.x, point.y) for point in path])
+            ax.plot(x, y)
+
+        for _, triggers in self.trigger_poses.items():
+            for trigger in triggers:
+                ax.plot(trigger.pose.position.x, trigger.pose.position.y, "o")
+                ax.text(
+                    trigger.pose.position.x,
+                    trigger.pose.position.y,
+                    f"({trigger.pose.position.x}, {trigger.pose.position.y})",
+                )
+
+        for _, multiline in self.restricted_areas.items():
+            for line in multiline.geoms:
+                x, y = line.xy
+                ax.plot(x, y, color="red", linewidth=5)
+
+        ax.set_xlabel("X Coordinate")
+        ax.set_ylabel("Y Coordinate")
+
+        plt.show()
+
 
 class PathCollisionServiceClient(Node):
     def __init__(self, namespace: str, max_attempts: int = MAX_ATTEMPTS):
-        super().__init__(f"{namespace}")
+        super().__init__(f"{namespace}_path_collision_service_client")
         self._define_clients()
         self.robot_id = namespace
         self.max_attempts = max_attempts
         self.request = PathService.Request()
-        self.trigger_poses: List[TriggerPose] = []
+        self.triggers: List[TriggerData] = []
         self.attempts = 0
 
     def _define_clients(self):
@@ -236,13 +276,16 @@ class PathCollisionServiceClient(Node):
         while not self.client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info("Waiting for service...")
 
-    def send_request(self, path_to_send):
+    def get_triggers(self):
+        return self.triggers
+
+    def send_request(self, path_to_send) -> Future:
         self.request.robot_id = self.robot_id
         self.request.path = path_to_send
 
         return self.client.call_async(self.request)
 
-    def call_service_in_loop(self, path_to_send):
+    def call_service_in_loop(self, path_to_send: Path) -> None:
         while rclpy.ok() and self.attempts < self.max_attempts:
             self.attempts += 1
             future = self.send_request(path_to_send)
@@ -250,10 +293,73 @@ class PathCollisionServiceClient(Node):
             if future.done():
                 response = future.result()
                 if response.trigger_poses:
-                    self.trigger_poses = response.trigger_poses
+                    self.triggers = self.process_trigger_data(
+                        response.trigger_poses
+                    )
                     self.get_logger().info("Properly retrieved trigger poses.")
-                    self.get_logger().info(f"{self.trigger_poses}")
+                    self.get_logger().info(f"{self.triggers}")
                     break
             else:
                 self.get_logger().info("Retrying request.")
             time.sleep(1)
+
+    def process_trigger_data(
+        self, trigger_poses: List[TriggerPose]
+    ) -> List[TriggerData]:
+        processed_triggers = []
+
+        for trigger in trigger_poses:
+            trigger_processed = TriggerData(
+                position=Point(
+                    (
+                        trigger.pose.position.x,
+                        trigger.pose.position.y,
+                    )
+                ),
+                trigger_type=trigger.type,
+                restricted_area_id=trigger.restricted_area_id,
+            )
+            processed_triggers.append(trigger_processed)
+
+        return processed_triggers
+
+
+class TriggerChecker(Node):
+    def __init__(self, namespace: str):
+        super().__init__(f"{namespace}_trigger_checker")
+        self._define_subscriber(namespace)
+        self.triggers: List[TriggerData] = []
+
+    def _define_subscriber(self, namespace: str):
+        self.amcl_pose_subscriber = self.create_subscription(
+            PoseWithCovarianceStamped,
+            f"/{namespace}/amcl_pose",
+            self.pose_callback,
+            10,
+        )
+        self.amcl_pose_subscriber
+
+    def pose_callback(self, message: PoseWithCovarianceStamped):
+        position = Point(
+            (message.pose.pose.position.x, message.pose.pose.position.x)
+        )
+        if self.is_trigger_reached(position):
+            self.get_logger().info("TRIGGER REACHED.")
+
+    def set_triggers(self, triggers: List[TriggerData]):
+        self.get_logger().info(f"{triggers}")
+        self.triggers = triggers
+
+    def is_trigger_reached(
+        self, current_position: Point
+    ) -> Optional[TriggerData]:
+        for trigger in self.triggers:
+            if (
+                current_position.distance(trigger.position)
+                <= TRIGGER_DISTANCE_M
+            ):
+                return trigger
+        return None
+
+    def activate_trigger(self):
+        pass

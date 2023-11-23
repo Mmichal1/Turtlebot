@@ -4,7 +4,10 @@ from copy import deepcopy
 
 from geometry_msgs.msg import PoseStamped
 from nav2_simple_commander.robot_navigator import BasicNavigator, TaskResult
-from turtlebot_mmrs.mmrs_classes import PathCollisionServiceClient
+from turtlebot_mmrs.mmrs_classes import (
+    PathCollisionServiceClient,
+    TriggerChecker,
+)
 
 import rclpy
 import time
@@ -19,26 +22,27 @@ def main():
     path_collision_service_client = PathCollisionServiceClient(
         namespace="robot2"
     )
+    trigger_checker = TriggerChecker(namespace="robot2")
 
     # Security route, probably read in from a file for a real application
     # from either a map or drive and repeat.
-    # security_route = [
-    #     [0.5, -1.5],
-    #     [-1.5, -1.5],
-    #     [-1.5, 0.5],
-    #     [0.5, 0.5],
-    # ]
-
     security_route = [
-        [0.0, -1.5],
-        [0.0, 1.5],
+        [-0.5, -1.5],
+        [-1.5, -1.5],
+        [-1.5, 0.5],
+        [0.5, 0.5],
+        [0.5, 1.5],
     ]
 
-    # Set our demo's initial pose
+    # security_route = [
+    #     [0.0, -1.5],
+    #     [0.0, 1.5],
+    # ]
+
     initial_pose = PoseStamped()
     initial_pose.header.frame_id = "map"
     initial_pose.header.stamp = navigator.get_clock().now().to_msg()
-    initial_pose.pose.position.x = 0.0
+    initial_pose.pose.position.x = -0.5
     initial_pose.pose.position.y = -1.5
     initial_pose.pose.position.z = 0.01
     initial_pose.pose.orientation.x = 0.0
@@ -47,9 +51,8 @@ def main():
     initial_pose.pose.orientation.w = 0.0
     navigator.setInitialPose(initial_pose)
 
-    # Wait for navigation to fully activate
     navigator.waitUntilNav2Active()
-    # Send our route
+
     route_poses = []
     pose = PoseStamped()
     pose.header.frame_id = "map"
@@ -63,9 +66,9 @@ def main():
     path = navigator.getPathThroughPoses(initial_pose, route_poses)
     path_collision_service_client.call_service_in_loop(path)
 
-    # Do security route until dead
     while rclpy.ok():
         navigator.goThroughPoses(route_poses)
+        # rclpy.spin_once(trigger_checker)
 
         i = 0
         while not navigator.isTaskComplete():
@@ -73,7 +76,6 @@ def main():
             feedback = navigator.getFeedback()
             if feedback and i % 5 == 0:
 
-                # Some failure mode, must stop since the robot is clearly stuck
                 if Duration.from_msg(feedback.navigation_time) > Duration(
                     seconds=180.0
                 ):
@@ -83,7 +85,6 @@ def main():
                     )
                     navigator.cancelTask()
 
-        # If at end of route, reverse the route to restart
         security_route.reverse()
 
         route_poses = []

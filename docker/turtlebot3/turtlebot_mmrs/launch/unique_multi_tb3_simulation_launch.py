@@ -55,7 +55,7 @@ def generate_launch_description():
         },
         {
             "name": "robot2",
-            "x_pose": 0.0,
+            "x_pose": -0.5,
             "y_pose": -1.5,
             "z_pose": 0.01,
             "roll": 0.0,
