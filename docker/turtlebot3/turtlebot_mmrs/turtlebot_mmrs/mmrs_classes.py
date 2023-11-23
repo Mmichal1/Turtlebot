@@ -1,10 +1,10 @@
-from typing import List, Dict
+from typing import List, Dict, Tuple, Union
 import matplotlib.pyplot as plt
 import rclpy
 import time
 from matplotlib.pyplot import Axes
 from shapely.geometry import LineString, Point
-
+from itertools import combinations
 from enum import Enum, unique
 from rclpy.node import Node
 from nav_msgs.msg import Path
@@ -27,7 +27,10 @@ class PathCollisionServiceServer(Node):
         self._define_service()
         self.robot_paths: Dict[str, Path] = {}
         self.trigger_poses: Dict[str, List[TriggerPose]] = {}
-        self.restricted_segments: Dict[str, LineString] = {}
+        self.restricted_segments_on_robots_path: Dict[
+            str, List[LineString]
+        ] = {}
+        self.restricted_areas: Dict[int, LineString] = {}
 
     def _define_service(self):
         self.service = self.create_service(
@@ -47,8 +50,9 @@ class PathCollisionServiceServer(Node):
         self.robot_paths[request.robot_id] = (
             self.convert_path_to_list_of_points(request.path)
         )
-        # Initialize dictionary
+        # Initialize dictionaries
         self.trigger_poses[request.robot_id] = []
+        self.restricted_segments_on_robots_path[request.robot_id] = []
 
         if "robot1" and "robot2" in self.robot_paths:
             self.process_paths()
@@ -64,18 +68,21 @@ class PathCollisionServiceServer(Node):
         self.determine_restricted_segments(self.robot_paths, threshold=0.5)
 
         for robot_id in self.robot_paths:
-            self.find_trigger_points(
-                robot_id,
-                self.robot_paths[robot_id],
-                self.restricted_segments[robot_id],
-                TriggerType.SIGNAL_TRIGGER,
-            )
-            self.find_trigger_points(
-                robot_id,
-                self.robot_paths[robot_id],
-                self.restricted_segments[robot_id],
-                TriggerType.STOP_TRIGGER,
-            )
+            for restricted_segment in self.restricted_segments_on_robots_path[
+                robot_id
+            ]:
+                self.find_trigger_points(
+                    robot_id,
+                    self.robot_paths[robot_id],
+                    restricted_segment,
+                    TriggerType.SIGNAL_TRIGGER,
+                )
+                self.find_trigger_points(
+                    robot_id,
+                    self.robot_paths[robot_id],
+                    restricted_segment,
+                    TriggerType.STOP_TRIGGER,
+                )
 
     def convert_path_to_list_of_points(self, path_msg: Path) -> List[Point]:
         return [
@@ -87,7 +94,7 @@ class PathCollisionServiceServer(Node):
         self,
         paths_dict: Dict[str, List[Point]],
         threshold: float,
-    ) -> Dict[str, LineString]:
+    ) -> Dict[str, List[LineString]]:
         """
         Iterate over all paths and find points of interference between them.
         If no collision segments found, then save empty LineString
@@ -109,11 +116,30 @@ class PathCollisionServiceServer(Node):
                         ):
                             restricted_segment_points.append(point)
 
-            self.restricted_segments[robot_i] = (
+            self.restricted_segments_on_robots_path[robot_i].append(
                 LineString(restricted_segment_points)
                 if restricted_segment_points
                 else LineString([])
             )
+
+        unique_id = 0
+        all_lines = [
+            (robot_id, restricted_segment)
+            for robot_id, lines in self.restricted_segments_on_robots_path.items()
+            for restricted_segment in lines
+        ]
+
+        for (robot_id_1, linestring_1), (
+            robot_id_2,
+            linestring_2,
+        ) in combinations(all_lines, 2):
+            if (
+                linestring_1.intersects(linestring_2)
+                and robot_id_1 != robot_id_2
+            ):
+                restricted_area = linestring_1.union(linestring_2)
+                self.restricted_areas[unique_id] = restricted_area
+                unique_id += 1
 
     def find_trigger_points(
         self,

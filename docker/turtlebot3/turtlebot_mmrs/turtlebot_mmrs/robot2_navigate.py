@@ -61,26 +61,7 @@ def main():
         route_poses.append(deepcopy(pose))
 
     path = navigator.getPathThroughPoses(initial_pose, route_poses)
-    path_collision_service_client.send_request(path)
-    attempts = 0
-
-    while rclpy.ok() and attempts < 2:
-        attempts += 1
-        future = path_collision_service_client.send_request(path)
-        rclpy.spin_until_future_complete(path_collision_service_client, future)
-        if future.done():
-            path_collision_service_client.get_logger().info("YES IT GOES HERE")
-            response = future.result()
-            if response.trigger_poses:
-                path_collision_service_client.get_logger().info(
-                    f"RESPONSEEEEEEEEEEE: {response.trigger_poses}"
-                )
-                break
-        else:
-            path_collision_service_client.get_logger().info(
-                f"NOT DONEEEEEEEEEeEEEEEEEEEEE"
-            )
-        time.sleep(1)
+    path_collision_service_client.call_service_in_loop(path)
 
     # Do security route until dead
     while rclpy.ok():

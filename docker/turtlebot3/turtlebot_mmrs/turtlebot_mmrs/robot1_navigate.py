@@ -65,8 +65,7 @@ def main():
         route_poses.append(deepcopy(pose))
 
     path = navigator.getPathThroughPoses(initial_pose, route_poses)
-    smoothed_path = navigator.smoothPath(path)
-    path_collision_service_client.call_service_in_loop(smoothed_path)
+    path_collision_service_client.call_service_in_loop(path)
 
     # Do security route until dead
     while rclpy.ok():
