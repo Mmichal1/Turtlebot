@@ -10,7 +10,7 @@ from turtlebot_mmrs.mmrs_classes import (
 )
 
 import rclpy
-import time
+import threading
 
 from rclpy.duration import Duration
 
@@ -23,6 +23,11 @@ def main():
         namespace="robot2"
     )
     trigger_checker = TriggerChecker(namespace="robot2")
+    executor = rclpy.executors.MultiThreadedExecutor()
+    executor.add_node(trigger_checker)
+    executor_thread = threading.Thread(target=executor.spin, daemon=True)
+    executor_thread.start()
+    rate = trigger_checker.create_rate(10)
 
     # Security route, probably read in from a file for a real application
     # from either a map or drive and repeat.
@@ -65,6 +70,7 @@ def main():
 
     path = navigator.getPathThroughPoses(initial_pose, route_poses)
     path_collision_service_client.call_service_in_loop(path)
+    trigger_checker.set_triggers(path_collision_service_client.get_triggers())
 
     while rclpy.ok():
         navigator.goThroughPoses(route_poses)
@@ -106,6 +112,8 @@ def main():
         elif result == TaskResult.FAILED:
             print("Security route failed! Restarting from other side...")
 
+    rclpy.shutdown()
+    executor_thread.join()
     exit(0)
 
 

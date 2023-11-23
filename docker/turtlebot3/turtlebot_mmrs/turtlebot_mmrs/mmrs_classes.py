@@ -247,7 +247,8 @@ class PathCollisionServiceServer(Node):
                 ax.text(
                     trigger.pose.position.x,
                     trigger.pose.position.y,
-                    f"({trigger.pose.position.x}, {trigger.pose.position.y})",
+                    f"({trigger.pose.position.x:.2f},"
+                    f" {trigger.pose.position.y:.2f})",
                 )
 
         for _, multiline in self.restricted_areas.items():

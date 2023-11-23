@@ -27,7 +27,7 @@ def main():
     executor.add_node(trigger_checker)
     executor_thread = threading.Thread(target=executor.spin, daemon=True)
     executor_thread.start()
-    rate = trigger_checker.create_rate(2)
+    rate = trigger_checker.create_rate(10)
 
     # Security route, probably read in from a file for a real application
     # from either a map or drive and repeat.
@@ -114,6 +114,7 @@ def main():
             exit(1)
         elif result == TaskResult.FAILED:
             print("Security route failed! Restarting from other side...")
+
     rclpy.shutdown()
     executor_thread.join()
     exit(0)
