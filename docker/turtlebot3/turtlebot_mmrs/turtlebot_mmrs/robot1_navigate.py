@@ -7,6 +7,7 @@ from nav2_simple_commander.robot_navigator import BasicNavigator, TaskResult
 from turtlebot_mmrs.mmrs_classes import PathCollisionServiceClient
 
 import rclpy
+import time
 from rclpy.duration import Duration
 
 
@@ -64,21 +65,8 @@ def main():
         route_poses.append(deepcopy(pose))
 
     path = navigator.getPathThroughPoses(initial_pose, route_poses)
-    path_collision_service_client.send_request(path)
-    while rclpy.ok():
-        rclpy.spin_once(path_collision_service_client)
-        if path_collision_service_client.future.done():
-            try:
-                response = path_collision_service_client.future.result()
-            except Exception as e:
-                path_collision_service_client.get_logger().info(
-                    "Service call failed %r" % (e,)
-                )
-            else:
-                path_collision_service_client.get_logger().info(
-                    "Success: %r" % (response.trigger_poses,)
-                )
-                break
+    smoothed_path = navigator.smoothPath(path)
+    path_collision_service_client.call_service_in_loop(smoothed_path)
 
     # Do security route until dead
     while rclpy.ok():

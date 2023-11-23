@@ -1,15 +1,18 @@
 from typing import List, Dict
 import matplotlib.pyplot as plt
 import rclpy
+import time
 from matplotlib.pyplot import Axes
 from shapely.geometry import LineString, Point
 
 from enum import Enum, unique
-from nav_msgs.msg import Path
 from rclpy.node import Node
-from rclpy.duration import Duration
+from nav_msgs.msg import Path
+from geometry_msgs.msg import Pose
 from mmrs_interfaces.srv import PathService
 from mmrs_interfaces.msg import TriggerPose
+
+MAX_ATTEMPTS = 5
 
 
 @unique
@@ -21,34 +24,39 @@ class TriggerType(Enum):
 class PathCollisionServiceServer(Node):
     def __init__(self):
         super().__init__("path_collision_service_server")
-        self.service = self.create_service(
-            PathService, "path_collision_service", self.path_service_callback
-        )
+        self._define_service()
         self.robot_paths: Dict[str, Path] = {}
         self.trigger_poses: Dict[str, List[TriggerPose]] = {}
         self.restricted_segments: Dict[str, LineString] = {}
-        self.timeout_duration = Duration(seconds=5)  # Timeout of 5 seconds
+
+    def _define_service(self):
+        self.service = self.create_service(
+            PathService, "path_collision_service", self.path_service_callback
+        )
 
     def path_service_callback(self, request, response):
+        """
+        Process paths only when all robots have sent their path.
+        If paths can't be processed then send empty list which
+        is a signal for the client to wait a bit and then send the
+        request again.
+        """
         self.get_logger().info(f"Received path from {request.robot_id}")
-        other_robot_id = "robot2" if request.robot_id == "robot1" else "robot1"
 
         # Store the path from each client
         self.robot_paths[request.robot_id] = (
             self.convert_path_to_list_of_points(request.path)
         )
+        # Initialize dictionary
+        self.trigger_poses[request.robot_id] = []
 
-        # Wait for the second path with a timeout
-        start_time = self.get_clock().now()
-        while other_robot_id not in self.robot_paths:
-            if (self.get_clock().now() - start_time) > self.timeout_duration:
-                break
-            rclpy.spin_once(self, timeout_sec=0.1)
-
-        if other_robot_id in self.robot_paths:
+        if "robot1" and "robot2" in self.robot_paths:
             self.process_paths()
 
-        response.trigger_poses = self.trigger_poses[request.robot_id]
+        if request.robot_id in self.trigger_poses:
+            response.trigger_poses = self.trigger_poses[request.robot_id]
+        else:
+            response.trigger_poses = []
 
         return response
 
@@ -82,6 +90,7 @@ class PathCollisionServiceServer(Node):
     ) -> Dict[str, LineString]:
         """
         Iterate over all paths and find points of interference between them.
+        If no collision segments found, then save empty LineString
         """
 
         line_strings = {
@@ -113,10 +122,15 @@ class PathCollisionServiceServer(Node):
         restricted_segment: LineString,
         trigger_type: TriggerType,
     ) -> List[Point]:
+        """
+        Find trigger points from each end of the restricted segment
+        """
+
+        if not restricted_segment:
+            return
+
         start_point = Point(restricted_segment.coords[0])
         end_point = Point(restricted_segment.coords[-1])
-
-        trigger_points = []
 
         # Check only points that are not on the restricted segments
         points_not_on_line = [
@@ -132,6 +146,7 @@ class PathCollisionServiceServer(Node):
             ),
             default=None,
         )
+
         closest_to_end = min(
             points_not_on_line,
             key=lambda point: abs(
@@ -140,12 +155,12 @@ class PathCollisionServiceServer(Node):
             default=None,
         )
 
-        trigger_pose_start = TriggerPose
+        trigger_pose_start = TriggerPose()
         trigger_pose_start.type = trigger_type.name
         trigger_pose_start.pose.position.x = closest_to_start.x
         trigger_pose_start.pose.position.y = closest_to_start.y
 
-        trigger_pose_end = TriggerPose
+        trigger_pose_end = TriggerPose()
         trigger_pose_end.type = trigger_type.name
         trigger_pose_end.pose.position.x = closest_to_end.x
         trigger_pose_end.pose.position.y = closest_to_end.y
@@ -154,90 +169,39 @@ class PathCollisionServiceServer(Node):
             [trigger_pose_start, trigger_pose_end]
         )
 
-    def plot_data(self):
-        wall_coords = [
-            (2.3, 2.3),
-            (2.3, -2.3),
-            (-2.3, -2.3),
-            (-2.3, 2.3),
-            (2.3, 2.3),
-        ]
-
-        wall_x, wall_y = zip(*wall_coords)
-
-        _, ax = plt.subplots(figsize=(8, 8))
-        ax.plot(
-            wall_x,
-            wall_y,
-            label="Wall (Room Boundary)",
-            color="black",
-            linewidth=5,
-        )
-
-        # self.plot_shapely_points(robot1_path, ax, "blue")
-        # self.plot_shapely_points(robot2_path, ax, "green")
-        # self.scatter_shapely_points(robot1_triggers_a, ax, "blue")
-        # self.scatter_shapely_points(robot2_triggers_a, ax, "green")
-        # self.scatter_shapely_points(robot1_triggers_b, ax, "blue")
-        # self.scatter_shapely_points(robot2_triggers_b, ax, "green")
-        # self.plot_shapely_linestring(path1_restricted_segment, ax, "red")
-        # self.plot_shapely_linestring(path2_restricted_segment, ax, "red")
-
-        # Adding details to the plot
-        ax.set_title("Paths of Robot 1 and Robot 2")
-        ax.set_xlabel("X Coordinate")
-        ax.set_ylabel("Y Coordinate")
-        ax.legend(loc="lower center", bbox_to_anchor=(0.5, -0.2))
-        ax.grid(True)
-        ax.set_xlim(-3.0, 3.0)
-        ax.set_ylim(-3.0, 3.0)
-
-        # Display the plot
-        plt.show()
-
-    def plot_shapely_points(
-        self,
-        points: List[Point],
-        ax: Axes,
-        color: str,
-    ) -> None:
-        x_coords = [point.x for point in points]
-        y_coords = [point.y for point in points]
-
-        ax.plot(x_coords, y_coords, color=color)
-
-    def scatter_shapely_points(
-        self,
-        points: List[Point],
-        ax: Axes,
-        color: str,
-    ) -> None:
-        x_coords = [point.x for point in points]
-        y_coords = [point.y for point in points]
-
-        ax.scatter(x_coords, y_coords, color=color)
-
-    def plot_shapely_linestring(
-        self,
-        linestring: LineString,
-        ax: Axes,
-        color: str,
-    ) -> None:
-        x, y = linestring.xy
-        ax.plot(x, y, color=color, linewidth=5)  # Plotting each LineString
-
 
 class PathCollisionServiceClient(Node):
-    def __init__(self, namespace: str):
+    def __init__(self, namespace: str, max_attempts: int = MAX_ATTEMPTS):
         super().__init__(f"{namespace}")
+        self._define_clients()
         self.robot_id = namespace
+        self.max_attempts = max_attempts
+        self.request = PathService.Request()
+        self.trigger_poses: List[TriggerPose] = []
+        self.attempts = 0
+
+    def _define_clients(self):
         self.client = self.create_client(PathService, "path_collision_service")
         while not self.client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info("Waiting for service...")
-        self.req = PathService.Request()
 
     def send_request(self, path_to_send):
-        self.req.robot_id = self.robot_id
-        self.req.path = path_to_send
+        self.request.robot_id = self.robot_id
+        self.request.path = path_to_send
 
-        self.future = self.client.call_async(self.req)
+        return self.client.call_async(self.request)
+
+    def call_service_in_loop(self, path_to_send):
+        while rclpy.ok() and self.attempts < self.max_attempts:
+            self.attempts += 1
+            future = self.send_request(path_to_send)
+            rclpy.spin_until_future_complete(self, future)
+            if future.done():
+                response = future.result()
+                if response.trigger_poses:
+                    self.trigger_poses = response.trigger_poses
+                    self.get_logger().info("Properly retrieved trigger poses.")
+                    break
+            else:
+                self.get_logger().info("Retrying request.")
+            time.sleep(1)
