@@ -13,6 +13,10 @@ from mmrs_interfaces.srv import PathService
 from mmrs_interfaces.msg import TriggerPose
 
 MAX_ATTEMPTS = 5
+RestrictedSegmentsDict = Dict[str, Dict[str, LineString]]
+TriggerPosesDict = Dict[str, List[TriggerPose]]
+RobotPathsDict = Dict[str, Path]
+RestrictedAreasDict = Dict[int, LineString]
 
 
 @unique
@@ -25,12 +29,10 @@ class PathCollisionServiceServer(Node):
     def __init__(self):
         super().__init__("path_collision_service_server")
         self._define_service()
-        self.robot_paths: Dict[str, Path] = {}
-        self.trigger_poses: Dict[str, List[TriggerPose]] = {}
-        self.restricted_segments_on_robots_path: Dict[
-            str, List[LineString]
-        ] = {}
-        self.restricted_areas: Dict[int, LineString] = {}
+        self.robot_paths: RobotPathsDict = {}
+        self.trigger_poses: TriggerPosesDict = {}
+        self.restricted_segments_on_path: RestrictedSegmentsDict = {}
+        self.restricted_areas: RestrictedAreasDict = {}
 
     def _define_service(self):
         self.service = self.create_service(
@@ -52,7 +54,7 @@ class PathCollisionServiceServer(Node):
         )
         # Initialize dictionaries
         self.trigger_poses[request.robot_id] = []
-        self.restricted_segments_on_robots_path[request.robot_id] = []
+        self.restricted_segments_on_path[request.robot_id] = {}
 
         if "robot1" and "robot2" in self.robot_paths:
             self.process_paths()
@@ -65,22 +67,27 @@ class PathCollisionServiceServer(Node):
         return response
 
     def process_paths(self):
-        self.determine_restricted_segments(self.robot_paths, threshold=0.5)
+        self.determine_restricted_segments_and_areas(
+            self.robot_paths, threshold=0.5
+        )
 
         for robot_id in self.robot_paths:
-            for restricted_segment in self.restricted_segments_on_robots_path[
-                robot_id
-            ]:
+            for (
+                restricted_segment_id,
+                restricted_segment,
+            ) in self.restricted_segments_on_path[robot_id].items():
                 self.find_trigger_points(
                     robot_id,
                     self.robot_paths[robot_id],
                     restricted_segment,
+                    restricted_segment_id,
                     TriggerType.SIGNAL_TRIGGER,
                 )
                 self.find_trigger_points(
                     robot_id,
                     self.robot_paths[robot_id],
                     restricted_segment,
+                    restricted_segment_id,
                     TriggerType.STOP_TRIGGER,
                 )
 
@@ -90,19 +97,21 @@ class PathCollisionServiceServer(Node):
             for pose in path_msg.poses
         ]
 
-    def determine_restricted_segments(
+    def determine_restricted_segments_and_areas(
         self,
         paths_dict: Dict[str, List[Point]],
         threshold: float,
-    ) -> Dict[str, List[LineString]]:
+    ) -> None:
         """
         Iterate over all paths and find points of interference between them.
         If no collision segments found, then save empty LineString
         """
+        restricted_segments: Dict[str, List[LineString]] = {}
+        line_strings: Dict[str, LineString] = {}
 
-        line_strings = {
-            robot_id: LineString(path) for robot_id, path in paths_dict.items()
-        }
+        for robot_id, path in paths_dict.items():
+            restricted_segments[robot_id] = []
+            line_strings[robot_id] = LineString(path)
 
         for robot_i, path_i in paths_dict.items():
             restricted_segment_points = []
@@ -116,28 +125,41 @@ class PathCollisionServiceServer(Node):
                         ):
                             restricted_segment_points.append(point)
 
-            self.restricted_segments_on_robots_path[robot_i].append(
+            restricted_segments[robot_i].append(
                 LineString(restricted_segment_points)
                 if restricted_segment_points
                 else LineString([])
             )
 
+        self.assign_ids_to_segments_and_areas(restricted_segments)
+
+    def assign_ids_to_segments_and_areas(
+        self, restricted_segments: Dict[str, List[LineString]]
+    ) -> None:
         unique_id = 0
-        all_lines = [
+        all_line_strings = [
             (robot_id, restricted_segment)
-            for robot_id, lines in self.restricted_segments_on_robots_path.items()
-            for restricted_segment in lines
+            for robot_id, line_strings in restricted_segments.items()
+            for restricted_segment in line_strings
         ]
 
-        for (robot_id_1, linestring_1), (
-            robot_id_2,
-            linestring_2,
-        ) in combinations(all_lines, 2):
-            if (
-                linestring_1.intersects(linestring_2)
-                and robot_id_1 != robot_id_2
-            ):
-                restricted_area = linestring_1.union(linestring_2)
+        for (
+            robot_i,
+            line_string_i,
+        ), (
+            robot_j,
+            line_string_j,
+        ) in combinations(all_line_strings, 2):
+            if line_string_i.intersects(line_string_j) and robot_i != robot_j:
+                restricted_area = line_string_i.union(line_string_j)
+                self.restricted_segments_on_path[robot_i][
+                    unique_id
+                ] = line_string_i
+
+                self.restricted_segments_on_path[robot_j][
+                    unique_id
+                ] = line_string_j
+
                 self.restricted_areas[unique_id] = restricted_area
                 unique_id += 1
 
@@ -146,8 +168,9 @@ class PathCollisionServiceServer(Node):
         robot_id: str,
         robot_path: List[Point],
         restricted_segment: LineString,
+        restricted_segment_id: int,
         trigger_type: TriggerType,
-    ) -> List[Point]:
+    ) -> None:
         """
         Find trigger points from each end of the restricted segment
         """
@@ -183,11 +206,13 @@ class PathCollisionServiceServer(Node):
 
         trigger_pose_start = TriggerPose()
         trigger_pose_start.type = trigger_type.name
+        trigger_pose_start.restricted_area_id = restricted_segment_id
         trigger_pose_start.pose.position.x = closest_to_start.x
         trigger_pose_start.pose.position.y = closest_to_start.y
 
         trigger_pose_end = TriggerPose()
         trigger_pose_end.type = trigger_type.name
+        trigger_pose_end.restricted_area_id = restricted_segment_id
         trigger_pose_end.pose.position.x = closest_to_end.x
         trigger_pose_end.pose.position.y = closest_to_end.y
 
@@ -227,6 +252,7 @@ class PathCollisionServiceClient(Node):
                 if response.trigger_poses:
                     self.trigger_poses = response.trigger_poses
                     self.get_logger().info("Properly retrieved trigger poses.")
+                    self.get_logger().info(f"{self.trigger_poses}")
                     break
             else:
                 self.get_logger().info("Retrying request.")

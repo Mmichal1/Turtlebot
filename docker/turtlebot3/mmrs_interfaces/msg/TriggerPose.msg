@@ -1,2 +1,3 @@
 string type
+int8 restricted_area_id
 geometry_msgs/Pose pose
