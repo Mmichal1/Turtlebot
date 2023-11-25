@@ -11,8 +11,8 @@ from rclpy.node import Node
 from rclpy.task import Future
 from nav_msgs.msg import Path
 from geometry_msgs.msg import PoseWithCovarianceStamped
-from mmrs_interfaces.srv import PathService
-from mmrs_interfaces.msg import TriggerPose
+from mmrs_interfaces.srv import PathService, ReserveArea
+from mmrs_interfaces.msg import TriggerPose, ReleaseArea
 
 MAX_ATTEMPTS = 5
 """Determines the max amount of attempts to send path processing request 
@@ -36,19 +36,27 @@ class TriggerData:
 
 class PathCollisionServiceServer(Node):
     def __init__(self):
-        super().__init__("path_collision_service_server")
-        self._define_service()
+        super().__init__("path_processing_service_server")
+        self._define_services()
         self.robot_paths: Dict[str, List[Point]] = {}
         self.trigger_poses: Dict[str, List[TriggerPose]] = {}
         self.restricted_segments_on_path: Dict[str, Dict[str, LineString]] = {}
-        self.restricted_areas: Dict[int, MultiLineString] = {}
+        self.restricted_areas_vis: Dict[int, MultiLineString] = {}
+        self.area_occupancy_map: Dict[int, Optional[str]] = {}
 
-    def _define_service(self):
-        self.service = self.create_service(
-            PathService, "path_collision_service", self.path_service_callback
+    def _define_services(self):
+        self.path_processing_service = self.create_service(
+            PathService,
+            "path_processing_service",
+            self.path_processing_service_callback,
+        )
+        self.reserve_area_service = self.create_service(
+            ReserveArea,
+            "reserve_area_service",
+            self.reserve_area_service_callback,
         )
 
-    def path_service_callback(self, request, response):
+    def path_processing_service_callback(self, request, response):
         """
         Process paths only when all robots have sent their path.
         If paths can't be processed then send empty list which
@@ -174,7 +182,10 @@ class PathCollisionServiceServer(Node):
                     unique_id
                 ] = line_string_j
 
-                self.restricted_areas[unique_id] = restricted_area
+                self.restricted_areas_vis[unique_id] = restricted_area
+
+                self.area_occupancy_map[unique_id] = None
+
                 unique_id += 1
 
     def find_trigger_points(
@@ -234,6 +245,23 @@ class PathCollisionServiceServer(Node):
             [trigger_pose_start, trigger_pose_end]
         )
 
+    def reserve_area_service_callback(self, request, response):
+        """
+        Check if reserved area is free (if it is then the value is None).
+        If reservation is succesful, return true, otherwise return false.
+        """
+        if not self.area_occupancy_map[request.restricted_area_id]:
+            self.area_occupancy_map[request.restricted_area_id] = (
+                request.robot_id
+            )
+            response.is_reserved = True
+
+            return response
+        else:
+            response.is_reserved = False
+
+            return response
+
     def visualize_data(self):
         fig, ax = plt.subplots()
 
@@ -251,7 +279,7 @@ class PathCollisionServiceServer(Node):
                     f" {trigger.pose.position.y:.2f})",
                 )
 
-        for _, multiline in self.restricted_areas.items():
+        for _, multiline in self.restricted_areas_vis.items():
             for line in multiline.geoms:
                 x, y = line.xy
                 ax.plot(x, y, color="red", linewidth=5)
@@ -264,27 +292,31 @@ class PathCollisionServiceServer(Node):
 
 class PathCollisionServiceClient(Node):
     def __init__(self, namespace: str, max_attempts: int = MAX_ATTEMPTS):
-        super().__init__(f"{namespace}_path_collision_service_client")
+        super().__init__(f"{namespace}_path_processing_service_client")
         self._define_clients()
         self.robot_id = namespace
         self.max_attempts = max_attempts
-        self.request = PathService.Request()
         self.triggers: List[TriggerData] = []
         self.attempts = 0
 
     def _define_clients(self):
-        self.client = self.create_client(PathService, "path_collision_service")
-        while not self.client.wait_for_service(timeout_sec=1.0):
+        self.path_processing_service_client = self.create_client(
+            PathService, "path_processing_service"
+        )
+        while not self.path_processing_service_client.wait_for_service(
+            timeout_sec=1.0
+        ):
             self.get_logger().info("Waiting for service...")
 
     def get_triggers(self):
         return self.triggers
 
     def send_request(self, path_to_send) -> Future:
-        self.request.robot_id = self.robot_id
-        self.request.path = path_to_send
+        request = PathService.Request()
+        request.robot_id = self.robot_id
+        request.path = path_to_send
 
-        return self.client.call_async(self.request)
+        return self.path_processing_service_client.call_async(request)
 
     def call_service_in_loop(self, path_to_send: Path) -> None:
         while rclpy.ok() and self.attempts < self.max_attempts:
@@ -328,10 +360,22 @@ class PathCollisionServiceClient(Node):
 class TriggerChecker(Node):
     def __init__(self, namespace: str):
         super().__init__(f"{namespace}_trigger_checker")
-        self._define_subscriber(namespace)
+        self._define_publishers()
+        self._define_subscribers(namespace)
+        self._define_transition_actions()
+        self.robot_id = namespace
         self.triggers: List[TriggerData] = []
+        self.previous_reserved_area_id: Optional[TriggerType] = None
+        self.previous_trigger: TriggerData = TriggerData(
+            Point(0.0, 0.0), TriggerType.STOP_TRIGGER, -1
+        )
 
-    def _define_subscriber(self, namespace: str):
+    def _define_publishers(self):
+        self.release_area_publisher = self.create_publisher(
+            ReleaseArea, "/release_area", 10
+        )
+
+    def _define_subscribers(self, namespace: str):
         self.amcl_pose_subscriber = self.create_subscription(
             PoseWithCovarianceStamped,
             f"/{namespace}/amcl_pose",
@@ -340,11 +384,58 @@ class TriggerChecker(Node):
         )
         self.amcl_pose_subscriber
 
+    def _define_clients(self):
+        self.reserve_area_service_client = self.create_client(
+            ReserveArea,
+            "reserve_area_service",
+        )
+        while not self.reserve_area_service_client.wait_for_service(
+            timeout_sec=1.0
+        ):
+            self.get_logger().info("Waiting for service...")
+
+    def _define_transition_actions(self):
+        self.transition_actions = {
+            (
+                TriggerType.STOP_TRIGGER,
+                TriggerType.SIGNAL_TRIGGER,
+            ): self.action_stop_to_signal,
+            (
+                TriggerType.SIGNAL_TRIGGER,
+                TriggerType.STOP_TRIGGER,
+            ): self.action_signal_to_stop,
+        }
+
+    def action_stop_to_signal(self):
+        pass
+
+    def action_signal_to_stop(self):
+        pass
+
+    def send_reserve_area_request(
+        self, robot_id: str, restricted_area_id: int
+    ) -> Future:
+        request = ReserveArea.Request()
+        request.robot_id = robot_id
+        request.restricted_area_id = restricted_area_id
+
+        return self.reserve_area_service_client.call_async(request)
+
     def pose_callback(self, message: PoseWithCovarianceStamped):
         position = Point(
             (message.pose.pose.position.x, message.pose.pose.position.x)
         )
-        if self.is_trigger_reached(position):
+        self.get_logger().info(f"AMCL Position: {position}")
+        current_trigger = self.is_trigger_reached(position)
+        if current_trigger and current_trigger != self.previous_trigger:
+            transition = (self.previous_trigger, current_trigger)
+            if transition in self.transition_actions:
+                self.transition_actions[
+                    transition
+                ]()  # Execute the action for the transition
+
+            # Check if the previous reserved area is different then the area of a trigger now
+            self.previous_trigger = current_trigger
             self.get_logger().info("TRIGGER REACHED.")
 
     def set_triggers(self, triggers: List[TriggerData]):

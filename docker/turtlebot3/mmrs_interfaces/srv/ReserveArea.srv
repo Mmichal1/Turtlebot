@@ -1,0 +1,8 @@
+# ReserveArea.srv
+
+# Request
+string robot_id
+int8 restricted_area_id
+---
+# Response
+bool is_reserved

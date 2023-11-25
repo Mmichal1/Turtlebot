@@ -1,0 +1,2 @@
+string robot_id
+int8 restricted_area_id
