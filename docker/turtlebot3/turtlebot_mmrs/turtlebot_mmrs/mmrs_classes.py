@@ -9,22 +9,24 @@ from itertools import combinations
 from enum import Enum, unique
 from rclpy.node import Node
 from rclpy.task import Future
+from nav2_simple_commander.robot_navigator import BasicNavigator
 from nav_msgs.msg import Path
-from geometry_msgs.msg import PoseWithCovarianceStamped
+from geometry_msgs.msg import PoseWithCovarianceStamped, PoseStamped
 from mmrs_interfaces.srv import PathService, ReserveArea
 from mmrs_interfaces.msg import TriggerPose, ReleaseArea
 
 MAX_ATTEMPTS = 5
 """Determines the max amount of attempts to send path processing request 
 and get trigger data"""
-TRIGGER_DISTANCE_M = 1.0
+TRIGGER_DISTANCE_M = 0.1
 """Determines how close the robot needs to be to the trigger to activate it."""
+ROBOT_RADIUS_M = 0.45
 
 
 @unique
 class TriggerType(Enum):
-    SIGNAL_TRIGGER = 0.6
-    STOP_TRIGGER = 0.4
+    SIGNAL_TRIGGER = 0.4
+    STOP_TRIGGER = 0.9
 
 
 @dataclass
@@ -90,7 +92,7 @@ class PathCollisionServiceServer(Node):
 
     def process_paths(self):
         self.determine_restricted_segments_and_areas(
-            self.robot_paths, threshold=0.5
+            self.robot_paths, threshold=ROBOT_RADIUS_M
         )
 
         for robot_id in self.robot_paths:
@@ -358,17 +360,25 @@ class PathCollisionServiceClient(Node):
 
 
 class TriggerChecker(Node):
-    def __init__(self, namespace: str):
+    robot_id: str
+    triggers: List[TriggerData]
+    navigator_node: BasicNavigator
+    is_entry_allowed: bool
+    current_trigger: Optional[TriggerData]
+    # route: List[PoseStamped]
+
+    def __init__(self, namespace: str, navigator_node: BasicNavigator):
         super().__init__(f"{namespace}_trigger_checker")
         self._define_publishers()
         self._define_subscribers(namespace)
         self._define_transition_actions()
+        self.reset_previous_trigger()
+
         self.robot_id = namespace
-        self.triggers: List[TriggerData] = []
-        self.previous_reserved_area_id: Optional[TriggerType] = None
-        self.previous_trigger: TriggerData = TriggerData(
-            Point(0.0, 0.0), TriggerType.STOP_TRIGGER, -1
-        )
+        self.navigator_node = navigator_node
+        self.triggers = []
+        self.is_entry_allowed = False
+        self.current_trigger = None
 
     def _define_publishers(self):
         self.release_area_publisher = self.create_publisher(
@@ -394,30 +404,97 @@ class TriggerChecker(Node):
         ):
             self.get_logger().info("Waiting for service...")
 
+    def _define_timers(self):
+        self.timer_request_area = self.create_timer(
+            2.0, self.request_area_timer_callback
+        )
+        self.timer_check_if_entry_permitted = self.create_timer(
+            2.0, self.entry_permission_timer_callback
+        )
+        self.timer_request_area.cancel()
+        self.timer_check_if_entry_permitted.cancel()
+
     def _define_transition_actions(self):
+        """
+        Based on the type of transition from trigger to trigger,
+        3 different actions are defined:
+            - SIGNAL -> SIGNAL, Area ID is not the same: Request access to an area,
+            - SIGNAL -> STOP, Area ID is the same: Stop robot if access not granted,
+            - STOP -> SIGNAL, Area ID is the same: Signal that an area is free
+        """
         self.transition_actions = {
             (
-                TriggerType.STOP_TRIGGER,
                 TriggerType.SIGNAL_TRIGGER,
-            ): self.action_stop_to_signal,
+                TriggerType.SIGNAL_TRIGGER,
+                False,
+            ): self.action_reserve_area,
             (
                 TriggerType.SIGNAL_TRIGGER,
                 TriggerType.STOP_TRIGGER,
-            ): self.action_signal_to_stop,
+                True,
+            ): self.action_stop_robot,
+            (
+                TriggerType.STOP_TRIGGER,
+                TriggerType.SIGNAL_TRIGGER,
+                True,
+            ): self.action_release_area,
         }
 
-    def action_stop_to_signal(self):
+    def reset_previous_trigger(self) -> None:
+        """
+        If robots turn around and follow the same path in reverse this can be used
+        so that the robots can request an access to the same area as it did previously.
+        """
+        self.previous_trigger: TriggerData = TriggerData(
+            Point(0.0, 0.0), TriggerType.SIGNAL_TRIGGER, -1
+        )
+
+    def action_release_area(self) -> None:
         pass
 
-    def action_signal_to_stop(self):
-        pass
+    def action_stop_robot(self) -> None:
+        """
+        Activate a timer that checks if the entrance is permitted.
+        If it is, then the timer cancels itself and robot doesn't stop.
+        If it isn't, then the current goal is canceled, and the timer
+        periodically checks if entrance is permitted and resumes the
+        goal if it is.
+        """
+        self.timer_check_if_entry_permitted.reset()
 
-    def send_reserve_area_request(
-        self, robot_id: str, restricted_area_id: int
-    ) -> Future:
+    def action_reserve_area(self) -> None:
+        """
+        Activate the timer that cancel itself in the callback
+        which effectively makes it work like a one-shot timer.
+        If entrance is not allowed, the timer is reset again
+        and request to reserve an area is sent again until
+        permission is granted.
+        """
+        self.timer_request_area.reset()
+
+    def request_area_timer_callback(self):
+        self.timer_request_area.cancel()
+        future = self.send_reserve_area_request()
+        rclpy.spin_until_future_complete(self, future)
+        if future.done():
+            response = future.result()
+            if response.is_reserved:
+                self.is_entry_allowed = True
+        else:
+            self.get_logger().info("Retrying request.")
+            self.timer_request_area.reset()
+
+    def entry_permission_timer_callback(self):
+        if self.is_entry_allowed:
+            self.timer_check_if_entry_permitted.cancel()
+        else:
+            # Maybe spam 0 to cmd_vel
+            self.navigator_node.cancelTask()
+
+    def send_reserve_area_request(self) -> Future:
         request = ReserveArea.Request()
-        request.robot_id = robot_id
-        request.restricted_area_id = restricted_area_id
+        request.robot_id = self.robot_id
+        request.restricted_area_id = self.current_trigger.restricted_area_id
 
         return self.reserve_area_service_client.call_async(request)
 
@@ -426,16 +503,48 @@ class TriggerChecker(Node):
             (message.pose.pose.position.x, message.pose.pose.position.x)
         )
         self.get_logger().info(f"AMCL Position: {position}")
-        current_trigger = self.is_trigger_reached(position)
-        if current_trigger and current_trigger != self.previous_trigger:
-            transition = (self.previous_trigger, current_trigger)
-            if transition in self.transition_actions:
-                self.transition_actions[
-                    transition
-                ]()  # Execute the action for the transition
 
-            # Check if the previous reserved area is different then the area of a trigger now
-            self.previous_trigger = current_trigger
+        self.current_trigger = self.is_trigger_reached(position)
+
+        # Check if trigger is reached and if the trigger is different than the previous one
+        if (
+            self.current_trigger
+            and self.current_trigger != self.previous_trigger
+        ):
+            transition = (
+                self.previous_trigger.trigger_type,
+                self.current_trigger.trigger_type,
+                self.current_trigger.restricted_area_id
+                == self.previous_trigger.restricted_area_id,
+            )
+
+            if transition in self.transition_actions:
+                pass
+                # self.transition_actions[
+                #     transition
+                # ]()  # Execute the action for the transition
+
+            self.previous_trigger = self.current_trigger
+            self.get_logger().info("TRIGGER REACHED.")
+
+        elif (
+            self.current_trigger
+            and self.current_trigger == self.previous_trigger
+        ):
+            transition = (
+                self.previous_trigger.trigger_type,
+                self.current_trigger.trigger_type,
+                self.current_trigger.restricted_area_id
+                == self.previous_trigger.restricted_area_id,
+            )
+
+            if transition in self.transition_actions:
+                pass
+                # self.transition_actions[
+                #     transition
+                # ]()  # Execute the action for the transition
+
+            self.previous_trigger = self.current_trigger
             self.get_logger().info("TRIGGER REACHED.")
 
     def set_triggers(self, triggers: List[TriggerData]):

@@ -22,7 +22,9 @@ def main():
     path_collision_service_client = PathCollisionServiceClient(
         namespace="robot2"
     )
-    trigger_checker = TriggerChecker(namespace="robot2")
+    trigger_checker = TriggerChecker(
+        namespace="robot2", navigator_node=navigator
+    )
     executor = rclpy.executors.MultiThreadedExecutor()
     executor.add_node(trigger_checker)
     executor_thread = threading.Thread(target=executor.spin, daemon=True)
@@ -31,24 +33,24 @@ def main():
 
     # Security route, probably read in from a file for a real application
     # from either a map or drive and repeat.
-    security_route = [
-        [-0.5, -1.5],
-        [-1.5, -1.5],
-        [-1.5, 0.5],
-        [0.5, 0.5],
-        [0.5, 1.5],
-    ]
-
     # security_route = [
-    #     [0.0, -1.5],
-    #     [0.0, 1.5],
+    #     [-0.5, -1.5],
+    #     [-1.5, -1.5],
+    #     [-1.5, 0.5],
+    #     [0.5, 0.5],
+    #     [0.5, 1.5],
     # ]
+
+    security_route = [
+        [1.8, 1.8],
+        [-1.8, -1.8],
+    ]
 
     initial_pose = PoseStamped()
     initial_pose.header.frame_id = "map"
     initial_pose.header.stamp = navigator.get_clock().now().to_msg()
-    initial_pose.pose.position.x = -0.5
-    initial_pose.pose.position.y = -1.5
+    initial_pose.pose.position.x = 1.8
+    initial_pose.pose.position.y = 1.8
     initial_pose.pose.position.z = 0.01
     initial_pose.pose.orientation.x = 0.0
     initial_pose.pose.orientation.y = 0.0
@@ -62,7 +64,8 @@ def main():
     pose = PoseStamped()
     pose.header.frame_id = "map"
     pose.header.stamp = navigator.get_clock().now().to_msg()
-    pose.pose.orientation.w = 1.0
+    pose.pose.orientation.z = 0.7071068
+    pose.pose.orientation.w = 0.7071068
     for pt in security_route:
         pose.pose.position.x = pt[0]
         pose.pose.position.y = pt[1]
@@ -73,7 +76,7 @@ def main():
     trigger_checker.set_triggers(path_collision_service_client.get_triggers())
 
     while rclpy.ok():
-        navigator.goThroughPoses(route_poses)
+        navigator.followWaypoints(route_poses)
         # rclpy.spin_once(trigger_checker)
 
         i = 0
@@ -81,15 +84,15 @@ def main():
             i += 1
             feedback = navigator.getFeedback()
             if feedback and i % 5 == 0:
-
-                if Duration.from_msg(feedback.navigation_time) > Duration(
-                    seconds=180.0
-                ):
-                    print(
-                        "Navigation has exceeded timeout of 180s, canceling"
-                        " request."
-                    )
-                    navigator.cancelTask()
+                print
+                # if Duration.from_msg(feedback.navigation_time) > Duration(
+                #     seconds=180.0
+                # ):
+                #     print(
+                #         "Navigation has exceeded timeout of 180s, canceling"
+                #         " request."
+                #     )
+                #     navigator.cancelTask()
 
         security_route.reverse()
 

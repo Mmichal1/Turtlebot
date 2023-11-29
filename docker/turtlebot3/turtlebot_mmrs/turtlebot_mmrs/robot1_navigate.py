@@ -22,12 +22,13 @@ def main():
     path_collision_service_client = PathCollisionServiceClient(
         namespace="robot1"
     )
-    trigger_checker = TriggerChecker(namespace="robot1")
+    trigger_checker = TriggerChecker(
+        namespace="robot1", navigator_node=navigator
+    )
     executor = rclpy.executors.MultiThreadedExecutor()
     executor.add_node(trigger_checker)
     executor_thread = threading.Thread(target=executor.spin, daemon=True)
     executor_thread.start()
-    rate = trigger_checker.create_rate(10)
 
     # Security route, probably read in from a file for a real application
     # from either a map or drive and repeat.
@@ -77,22 +78,23 @@ def main():
     trigger_checker.set_triggers(path_collision_service_client.get_triggers())
 
     while rclpy.ok():
-        navigator.goThroughPoses(route_poses)
+        navigator.followWaypoints(route_poses)
 
         i = 0
         while not navigator.isTaskComplete():
             i += 1
             feedback = navigator.getFeedback()
             if feedback and i % 5 == 0:
+                print(feedback)
 
-                if Duration.from_msg(feedback.navigation_time) > Duration(
-                    seconds=180.0
-                ):
-                    print(
-                        "Navigation has exceeded timeout of 180s, canceling"
-                        " request."
-                    )
-                    navigator.cancelTask()
+                # if Duration.from_msg(feedback.navigation_time) > Duration(
+                #     seconds=180.0
+                # ):
+                #     print(
+                #         "Navigation has exceeded timeout of 180s, canceling"
+                #         " request."
+                #     )
+                #     navigator.cancelTask()
 
         security_route.reverse()
 
