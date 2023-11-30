@@ -12,79 +12,79 @@ from turtlebot_mmrs.mmrs_classes import (
 import rclpy
 import threading
 
-from rclpy.duration import Duration
-
 
 def main():
     rclpy.init()
 
-    navigator = BasicNavigator(namespace="robot2")
-    path_collision_service_client = PathCollisionServiceClient(
+    navigator_robot_ = BasicNavigator(namespace="robot2")
+    path_collision_service_client_robot_2 = PathCollisionServiceClient(
         namespace="robot2"
     )
-    trigger_checker = TriggerChecker(
-        namespace="robot2", navigator_node=navigator
+    trigger_checker_robot_2 = TriggerChecker(
+        namespace="robot2", navigator_node=navigator_robot_
     )
-    executor = rclpy.executors.MultiThreadedExecutor()
-    executor.add_node(trigger_checker)
-    executor_thread = threading.Thread(target=executor.spin, daemon=True)
-    executor_thread.start()
-    rate = trigger_checker.create_rate(10)
-
-    # Security route, probably read in from a file for a real application
-    # from either a map or drive and repeat.
-    # security_route = [
-    #     [-0.5, -1.5],
-    #     [-1.5, -1.5],
-    #     [-1.5, 0.5],
-    #     [0.5, 0.5],
-    #     [0.5, 1.5],
-    # ]
+    executor_robot_2 = rclpy.executors.MultiThreadedExecutor()
+    executor_robot_2.add_node(trigger_checker_robot_2)
+    executor_thread_robot_2 = threading.Thread(
+        target=executor_robot_2.spin, daemon=True
+    )
+    executor_thread_robot_2.start()
 
     security_route = [
-        [1.8, 1.8],
-        [-1.8, -1.8],
+        [
+            1.8,
+            1.8,
+            0.9238795,
+            -0.3826834,
+        ],
+        [
+            -1.8,
+            -1.8,
+            0.3826834,
+            0.9238795,
+        ],
     ]
 
     initial_pose = PoseStamped()
     initial_pose.header.frame_id = "map"
-    initial_pose.header.stamp = navigator.get_clock().now().to_msg()
+    initial_pose.header.stamp = navigator_robot_.get_clock().now().to_msg()
     initial_pose.pose.position.x = 1.8
     initial_pose.pose.position.y = 1.8
     initial_pose.pose.position.z = 0.01
     initial_pose.pose.orientation.x = 0.0
     initial_pose.pose.orientation.y = 0.0
-    initial_pose.pose.orientation.z = 1.0
-    initial_pose.pose.orientation.w = 0.0
-    navigator.setInitialPose(initial_pose)
+    initial_pose.pose.orientation.z = 0.9238795
+    initial_pose.pose.orientation.w = -0.3826834
+    navigator_robot_.setInitialPose(initial_pose)
 
-    navigator.waitUntilNav2Active()
+    navigator_robot_.waitUntilNav2Active()
 
     route_poses = []
     pose = PoseStamped()
     pose.header.frame_id = "map"
-    pose.header.stamp = navigator.get_clock().now().to_msg()
-    pose.pose.orientation.z = 0.7071068
-    pose.pose.orientation.w = 0.7071068
+    pose.header.stamp = navigator_robot_.get_clock().now().to_msg()
     for pt in security_route:
         pose.pose.position.x = pt[0]
         pose.pose.position.y = pt[1]
+        pose.pose.orientation.z = pt[2]
+        pose.pose.orientation.w = pt[3]
         route_poses.append(deepcopy(pose))
 
-    path = navigator.getPathThroughPoses(initial_pose, route_poses)
-    path_collision_service_client.call_service_in_loop(path)
-    trigger_checker.set_triggers(path_collision_service_client.get_triggers())
+    path = navigator_robot_.getPathThroughPoses(initial_pose, route_poses)
+    path_collision_service_client_robot_2.call_service_in_loop(path)
+    trigger_checker_robot_2.set_triggers(
+        path_collision_service_client_robot_2.get_triggers()
+    )
 
     while rclpy.ok():
-        navigator.followWaypoints(route_poses)
-        # rclpy.spin_once(trigger_checker)
+        navigator_robot_.followWaypoints(route_poses)
 
         i = 0
-        while not navigator.isTaskComplete():
+        while not navigator_robot_.isTaskComplete():
             i += 1
-            feedback = navigator.getFeedback()
+            feedback = navigator_robot_.getFeedback()
             if feedback and i % 5 == 0:
-                print
+                pass
                 # if Duration.from_msg(feedback.navigation_time) > Duration(
                 #     seconds=180.0
                 # ):
@@ -99,14 +99,15 @@ def main():
         route_poses = []
         pose = PoseStamped()
         pose.header.frame_id = "map"
-        pose.header.stamp = navigator.get_clock().now().to_msg()
-        pose.pose.orientation.w = 1.0
+        pose.header.stamp = navigator_robot_.get_clock().now().to_msg()
         for pt in security_route:
             pose.pose.position.x = pt[0]
             pose.pose.position.y = pt[1]
+            pose.pose.orientation.z = pt[2]
+            pose.pose.orientation.w = pt[3]
             route_poses.append(deepcopy(pose))
 
-        result = navigator.getResult()
+        result = navigator_robot_.getResult()
         if result == TaskResult.SUCCEEDED:
             print("Route complete! Restarting...")
         elif result == TaskResult.CANCELED:
@@ -116,7 +117,7 @@ def main():
             print("Security route failed! Restarting from other side...")
 
     rclpy.shutdown()
-    executor_thread.join()
+    executor_thread_robot_2.join()
     exit(0)
 
 

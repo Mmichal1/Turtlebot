@@ -51,7 +51,7 @@ def generate_launch_description():
             "z_pose": 0.01,
             "roll": 0.0,
             "pitch": 0.0,
-            "yaw": 0.0,
+            "yaw": -0.7853982,
         },
         {
             "name": "robot2",
@@ -60,7 +60,7 @@ def generate_launch_description():
             "z_pose": 0.01,
             "roll": 0.0,
             "pitch": 0.0,
-            "yaw": 3.1416,
+            "yaw": -2.3561945,
         },
     ]
 
