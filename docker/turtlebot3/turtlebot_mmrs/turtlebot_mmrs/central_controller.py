@@ -66,11 +66,15 @@ class CentralController(Node):
         robot_id = message.robot_id
         area_id = message.restricted_area_id
 
-        if (
-            not self.area_occupancy_map[area_id]
-            or self.area_occupancy_map[area_id] == robot_id
-        ):
+        self.get_logger().info(
+            f"Received area reservation call from {robot_id}"
+        )
+
+        if not self.area_occupancy_map[area_id]:
             self.area_occupancy_map[area_id] = robot_id
+
+            self.get_logger().info(f"Area {area_id} reserved for {robot_id}.")
+
             self.send_entry_permission(robot_id, area_id)
         else:
             self.area_queue[area_id].put(robot_id)
@@ -79,10 +83,17 @@ class CentralController(Node):
         robot_id = message.robot_id
         area_id = message.restricted_area_id
 
+        self.get_logger().info(f"Received area release call from {robot_id}.")
+
         if self.area_occupancy_map[area_id] == robot_id:
             self.area_occupancy_map[area_id] = None
 
+            self.get_logger().info(f"Area {area_id} released.")
+
             if not self.area_queue[area_id].empty():
+                self.get_logger().info(
+                    f"Next in queue for {area_id} is {robot_id}."
+                )
                 next_robot_id_from_queue = self.area_queue[area_id].get()
                 self.area_occupancy_map[area_id] = next_robot_id_from_queue
                 self.send_entry_permission(next_robot_id_from_queue, area_id)
@@ -91,6 +102,8 @@ class CentralController(Node):
         message = AreaMessage()
         message.robot_id = robot_id
         message.restricted_area_id = restricted_area_id
+
+        self.get_logger().info(f"Entry permission for {robot_id} granted.")
 
         self.entry_permission_publisher.publish(message)
 

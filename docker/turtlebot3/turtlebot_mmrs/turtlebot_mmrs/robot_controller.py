@@ -4,7 +4,6 @@ from typing import List, Optional
 from shapely.geometry import Point
 from rclpy.node import Node
 from rclpy.task import Future
-from nav2_simple_commander.robot_navigator import BasicNavigator
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseStamped
 from nav_msgs.msg import Path
 from mmrs_interfaces.msg import AreaMessage, TriggerPose
@@ -242,9 +241,6 @@ class RobotController(Node):
             self.current_trigger
             and self.current_trigger != self.previous_trigger
         ):
-            self.get_logger().info(
-                f"Trigger reached, type: {self.current_trigger.trigger_type}"
-            )
             transition = (
                 self.previous_trigger.trigger_type,
                 self.current_trigger.trigger_type,
@@ -253,9 +249,6 @@ class RobotController(Node):
             )
 
             if transition in self.transition_events:
-                self.get_logger().info(
-                    f"Transition: {self.current_trigger.trigger_type}"
-                )
                 # Activate
                 self.transition_events[transition]()
 
@@ -265,9 +258,6 @@ class RobotController(Node):
             self.current_trigger
             and self.current_trigger == self.previous_trigger
         ):
-            self.get_logger().info(
-                f"Trigger reached, type: {self.current_trigger.trigger_type}"
-            )
             transition = (
                 self.previous_trigger.trigger_type,
                 self.current_trigger.trigger_type,
@@ -276,9 +266,6 @@ class RobotController(Node):
             )
 
             if transition in self.transition_events:
-                self.get_logger().info(
-                    f"Transition: {self.current_trigger.trigger_type}"
-                )
                 # Activate
                 self.transition_events[transition]()
 

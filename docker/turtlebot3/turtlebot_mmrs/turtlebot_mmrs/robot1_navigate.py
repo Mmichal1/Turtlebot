@@ -13,6 +13,8 @@ import rclpy
 def main():
     rclpy.init()
 
+    reverse_path = False
+    last_waypoint = 0
     navigator = BasicNavigator(namespace="robot1")
     robot_controller = RobotController(namespace="robot1")
 
@@ -64,37 +66,44 @@ def main():
         exit(0)
 
     while rclpy.ok():
-        navigator.followWaypoints(route_poses)
+        if not robot_controller.is_stopping_required:
+            navigator.followWaypoints(route_poses)
 
-        while not navigator.isTaskComplete():
+        rclpy.spin_once(robot_controller)
+
+        while rclpy.ok():
+            if navigator.isTaskComplete():
+                robot_controller.get_logger().info(
+                    "Task completed, reversing."
+                )
+                robot_controller.reset_previous_trigger()
+                reverse_path = not reverse_path
+                break
+
             rclpy.spin_once(robot_controller)
 
             if robot_controller.is_stopping_required:
                 navigator.cancelTask()
 
             feedback = navigator.getFeedback()
+            last_waypoint = feedback.current_waypoint
 
-        security_route.reverse()
+        if reverse_path:
+            security_route.reverse()
 
         route_poses = []
         pose = PoseStamped()
         pose.header.frame_id = "map"
         pose.header.stamp = navigator.get_clock().now().to_msg()
-        for pt in security_route:
+        for pt in security_route[last_waypoint:]:
             pose.pose.position.x = pt[0]
             pose.pose.position.y = pt[1]
             pose.pose.orientation.z = pt[2]
             pose.pose.orientation.w = pt[3]
             route_poses.append(deepcopy(pose))
 
+        last_waypoint = 0
         result = navigator.getResult()
-        if result == TaskResult.SUCCEEDED:
-            print("Route complete! Restarting...")
-        elif result == TaskResult.CANCELED:
-            print("Security route was canceled, exiting.")
-            exit(1)
-        elif result == TaskResult.FAILED:
-            print("Security route failed! Restarting from other side...")
 
     rclpy.shutdown()
     exit(0)
