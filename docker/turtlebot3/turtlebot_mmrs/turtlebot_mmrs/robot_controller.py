@@ -27,15 +27,16 @@ class RobotController(Node):
     current_trigger: Optional[TriggerData]
     attempts_to_get_triggers: int
 
-    def __init__(self, namespace: str, navigator_node: BasicNavigator):
+    def __init__(self, namespace: str):
         super().__init__(f"{namespace}_controller")
+        self.robot_id = namespace
+
         self._define_publishers()
         self._define_subscribers()
         self._define_clients()
         self._define_transition_events()
         self.reset_previous_trigger()
 
-        self.robot_id = namespace
         self.triggers = []
         self.route_poses = []
         self.is_entry_allowed = False
@@ -105,6 +106,9 @@ class RobotController(Node):
         If robots turn around and follow the same path in reverse this can be used
         so that the robots can request an access to the same area as it did previously.
         """
+
+        self.get_logger().info("Reseting previous trigger.")
+
         self.previous_trigger: TriggerData = TriggerData(
             position=Point(-100.0, -100.0),
             trigger_type=TriggerType.SIGNAL_TRIGGER.name,
@@ -119,6 +123,9 @@ class RobotController(Node):
             message.restricted_area_id
             == self.current_trigger.restricted_area_id
         ):
+            self.get_logger().info(
+                f"Entry into area {message.restricted_area_id} permitted."
+            )
             self.is_entry_allowed = True
             self.is_stopping_required = False
 
@@ -126,6 +133,10 @@ class RobotController(Node):
         """
         Send release area message. Reset entry permission flag.
         """
+        self.get_logger().info(
+            f"Releasing area {self.current_trigger.restricted_area_id}."
+        )
+
         message = AreaMessage()
         message.robot_id = self.robot_id
         message.restricted_area_id = self.current_trigger.restricted_area_id
@@ -139,12 +150,17 @@ class RobotController(Node):
         Check if entry is allowed. If it isn't, stop robot by cancelling the task
         """
         if not self.is_entry_allowed:
+            self.get_logger().info(f"Stopping...")
             self.is_stopping_required = True
 
     def event_reserve_area(self) -> None:
         """
         Send reserve area message.
         """
+        self.get_logger().info(
+            "Trying to reserve area"
+            f" {self.current_trigger.restricted_area_id}."
+        )
         message = AreaMessage()
         message.robot_id = self.robot_id
         message.restricted_area_id = self.current_trigger.restricted_area_id
@@ -155,6 +171,7 @@ class RobotController(Node):
         """
         Send path service request.
         """
+        self.get_logger().info(f"Sending path service request.")
         request = PathService.Request()
         request.robot_id = self.robot_id
         request.path = path_to_send
@@ -225,6 +242,9 @@ class RobotController(Node):
             self.current_trigger
             and self.current_trigger != self.previous_trigger
         ):
+            self.get_logger().info(
+                f"Trigger reached, type: {self.current_trigger.trigger_type}"
+            )
             transition = (
                 self.previous_trigger.trigger_type,
                 self.current_trigger.trigger_type,
@@ -233,13 +253,21 @@ class RobotController(Node):
             )
 
             if transition in self.transition_events:
+                self.get_logger().info(
+                    f"Transition: {self.current_trigger.trigger_type}"
+                )
                 # Activate
                 self.transition_events[transition]()
+
+            self.previous_trigger = self.current_trigger
 
         elif (
             self.current_trigger
             and self.current_trigger == self.previous_trigger
         ):
+            self.get_logger().info(
+                f"Trigger reached, type: {self.current_trigger.trigger_type}"
+            )
             transition = (
                 self.previous_trigger.trigger_type,
                 self.current_trigger.trigger_type,
@@ -248,10 +276,13 @@ class RobotController(Node):
             )
 
             if transition in self.transition_events:
+                self.get_logger().info(
+                    f"Transition: {self.current_trigger.trigger_type}"
+                )
                 # Activate
                 self.transition_events[transition]()
 
-        self.previous_trigger = self.current_trigger
+            self.previous_trigger = self.current_trigger
 
     def find_matching_trigger(
         self, current_position: Point
