@@ -13,7 +13,7 @@ find_package(nav_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/ReleaseArea.msg"
+  "msg/AreaMessage.msg"
   "msg/TriggerPose.msg"
   "srv/ReserveArea.srv"
   "srv/PathService.srv"

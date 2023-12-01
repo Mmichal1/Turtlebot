@@ -14,7 +14,7 @@ from nav2_simple_commander.robot_navigator import BasicNavigator
 from nav_msgs.msg import Path
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseStamped
 from mmrs_interfaces.srv import PathService, ReserveArea
-from mmrs_interfaces.msg import TriggerPose, ReleaseArea
+from mmrs_interfaces.msg import TriggerPose, AreaMessage
 
 MAX_ATTEMPTS = 10
 """Determines the max amount of attempts to send path processing request 
@@ -389,7 +389,7 @@ class TriggerChecker(Node):
 
     def _define_publishers(self):
         self.release_area_publisher = self.create_publisher(
-            ReleaseArea, "/release_area", 10
+            AreaMessage, "/release_area", 10
         )
 
     def _define_subscribers(self, namespace: str):
@@ -412,16 +412,13 @@ class TriggerChecker(Node):
             self.get_logger().info("Waiting for service...")
 
     def _define_timers(self):
-        timer_callback_group = ReentrantCallbackGroup()
         self.timer_request_area = self.create_timer(
             2.0,
             self.request_area_timer_callback,
-            callback_group=timer_callback_group,
         )
         self.timer_check_if_entry_permitted = self.create_timer(
             2.0,
             self.entry_permission_timer_callback,
-            callback_group=timer_callback_group,
         )
         self.timer_request_area.cancel()
         self.timer_check_if_entry_permitted.cancel()
@@ -485,7 +482,7 @@ class TriggerChecker(Node):
         and request to reserve an area is sent again until
         permission is granted.
         """
-        self.get_logger().info("RESERVE ACTION CALLED.")
+        # self.get_logger().info("RESERVE ACTION CALLED.")
         self.timer_request_area.reset()
 
     def request_area_timer_callback(self):
@@ -495,13 +492,13 @@ class TriggerChecker(Node):
 
         future = self.reserve_area_service_client.call_async(request)
 
-        self.get_logger().info("SERVICE CALLED")
+        # self.get_logger().info("SERVICE CALLED")
 
         rclpy.spin_until_future_complete(self, future)
 
         response = future.result()
 
-        self.get_logger().info(f"RESULT: {response}")
+        # self.get_logger().info(f"RESULT: {response}")
 
     def entry_permission_timer_callback(self):
         if self.is_entry_allowed:
@@ -537,9 +534,9 @@ class TriggerChecker(Node):
                 ]()  # Execute the action for the transition
 
             self.previous_trigger = self.current_trigger
-            self.get_logger().info(
-                f"TRIGGER REACHED. Transition: {transition}"
-            )
+            # self.get_logger().info(
+            #     f"TRIGGER REACHED. Transition: {transition}"
+            # )
 
         elif (
             self.current_trigger
@@ -559,9 +556,9 @@ class TriggerChecker(Node):
                 ]()  # Execute the action for the transition
 
             self.previous_trigger = self.current_trigger
-            self.get_logger().info(
-                f"TRIGGER REACHED. Transition: {transition}"
-            )
+            # self.get_logger().info(
+            #     f"TRIGGER REACHED. Transition: {transition}"
+            # )
 
     def set_triggers(self, triggers: List[TriggerData]):
         self.get_logger().info(f"{triggers}")
