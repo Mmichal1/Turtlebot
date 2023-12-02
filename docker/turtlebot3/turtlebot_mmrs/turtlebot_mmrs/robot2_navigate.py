@@ -13,8 +13,8 @@ import rclpy
 def main():
     rclpy.init()
 
-    reverse_path = False
-    last_waypoint = 0
+    reverse_path = True
+    last_waypoint = -1
     navigator = BasicNavigator(namespace="robot2")
     robot_controller = RobotController(namespace="robot2")
 
@@ -73,11 +73,11 @@ def main():
 
         while rclpy.ok():
             if navigator.isTaskComplete():
-                robot_controller.get_logger().info(
-                    "Task completed, reversing."
-                )
-                robot_controller.reset_previous_trigger()
-                reverse_path = not reverse_path
+                # robot_controller.get_logger().info(
+                #     "Task completed, reversing."
+                # )
+                # robot_controller.reset_previous_trigger()
+                # reverse_path = not reverse_path
                 break
 
             rclpy.spin_once(robot_controller)
@@ -95,7 +95,7 @@ def main():
         pose = PoseStamped()
         pose.header.frame_id = "map"
         pose.header.stamp = navigator.get_clock().now().to_msg()
-        for pt in security_route[last_waypoint:]:
+        for pt in security_route[1:]:
             pose.pose.position.x = pt[0]
             pose.pose.position.y = pt[1]
             pose.pose.orientation.z = pt[2]
