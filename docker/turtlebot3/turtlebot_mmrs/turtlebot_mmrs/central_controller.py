@@ -1,12 +1,11 @@
 from typing import List, Dict, Optional
-from queue import Queue
 from shapely.geometry import MultiLineString, LineString, Point
 from itertools import combinations
 from rclpy.node import Node
 from nav_msgs.msg import Path
 from mmrs_interfaces.srv import PathService
 from mmrs_interfaces.msg import TriggerPose, AreaMessage
-from turtlebot_mmrs.mmrs_classes import TriggerType
+from turtlebot_mmrs.mmrs_classes import TriggerType, UniqueQueue
 
 ROBOT_RADIUS_M = 0.55
 
@@ -17,7 +16,7 @@ class CentralController(Node):
     restricted_segments_on_path: Dict[str, Dict[str, LineString]]
     restricted_areas_vis: Dict[int, MultiLineString]
     area_occupancy_map: Dict[int, Optional[str]]
-    area_queue: Dict[int, Queue]
+    area_queue: Dict[int, UniqueQueue]
 
     def __init__(self):
         super().__init__("central_controller")
@@ -77,7 +76,7 @@ class CentralController(Node):
 
             self.send_entry_permission(robot_id, area_id)
         else:
-            self.area_queue[area_id].put(robot_id)
+            self.area_queue[area_id].enqueue(robot_id)
 
     def release_area_callback(self, message: AreaMessage):
         robot_id = message.robot_id
@@ -90,11 +89,11 @@ class CentralController(Node):
 
             self.get_logger().info(f"Area {area_id} released.")
 
-            if not self.area_queue[area_id].empty():
+            if not self.area_queue[area_id].is_empty():
                 self.get_logger().info(
                     f"Next in queue for {area_id} is {robot_id}."
                 )
-                next_robot_id_from_queue = self.area_queue[area_id].get()
+                next_robot_id_from_queue = self.area_queue[area_id].dequeue()
                 self.area_occupancy_map[area_id] = next_robot_id_from_queue
                 self.send_entry_permission(next_robot_id_from_queue, area_id)
 
@@ -235,7 +234,7 @@ class CentralController(Node):
 
                 self.area_occupancy_map[unique_id] = None
 
-                self.area_queue[unique_id] = Queue()
+                self.area_queue[unique_id] = UniqueQueue()
 
                 unique_id += 1
 
