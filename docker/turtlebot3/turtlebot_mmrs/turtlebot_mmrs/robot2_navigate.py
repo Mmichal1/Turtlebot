@@ -79,6 +79,8 @@ def main():
         rclpy.spin_once(robot_controller)
 
         while not task_status == TaskStatus.CANCELLED:
+            # navigator.get_logger().info(f"SECOND LOOP")
+
             robot_controller.get_logger().info(f"{navigator.isTaskComplete()}")
             if (
                 navigator.isTaskComplete()
@@ -99,7 +101,6 @@ def main():
                 elif waypoint_to_follow < 0:
                     reverse = False
                     waypoint_to_follow = 0
-
                 task_status = TaskStatus.COMPLETED
                 break
 
@@ -128,11 +129,11 @@ def main():
         #     print("Route complete! Restarting...")
         # elif result == TaskResult.CANCELED:
         #     print("Security route was canceled, exiting.")
-        #     # exit(1)
+        #     exit(1)
         # elif result == TaskResult.FAILED:
         #     print("Security route failed! Restarting from other side...")
-
-        waypoint_to_follow = 0
+        last_waypoint = 0
+        result = navigator.getResult()
 
     rclpy.shutdown()
     exit(0)

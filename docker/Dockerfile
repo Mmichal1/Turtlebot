@@ -47,11 +47,12 @@ RUN apt-get update \
 COPY docker/entrypoint.sh /entrypoint.sh
 COPY docker/bashrc /home/${USERNAME}/.bashrc
 
+WORKDIR /home/ros/
 
+RUN git clone git@git.kcir.pwr.edu.pl:mtrela2/mmrs_central_control.git
 
 WORKDIR /home/ros/turtlebot3/
 
-RUN colcon build --symlink-install
 
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
 CMD ["bash"]

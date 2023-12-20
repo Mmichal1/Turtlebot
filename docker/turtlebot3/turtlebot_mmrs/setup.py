@@ -35,7 +35,10 @@ setup(
             "robot1_navigate = turtlebot_mmrs.robot1_navigate:main",
             "robot2_navigate = turtlebot_mmrs.robot2_navigate:main",
             "controller = turtlebot_mmrs.controller:main",
-            "test = turtlebot_mmrs.test_module:main",
+            (
+                "rigid_bodies_listener ="
+                " turtlebot_mmrs.rigid_bodies_listener:main"
+            ),
         ],
     },
 )
