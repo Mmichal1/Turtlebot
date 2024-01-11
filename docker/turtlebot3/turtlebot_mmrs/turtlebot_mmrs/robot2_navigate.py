@@ -81,7 +81,7 @@ def main():
         while not task_status == TaskStatus.CANCELLED:
             # navigator.get_logger().info(f"SECOND LOOP")
 
-            robot_controller.get_logger().info(f"{navigator.isTaskComplete()}")
+            # robot_controller.get_logger().info(f"{navigator.isTaskComplete()}")
             if (
                 navigator.isTaskComplete()
                 and not task_status == TaskStatus.CANCELLED
