@@ -14,6 +14,7 @@ services:
       - GAZEBO_MODEL_PATH=:/home/ros/turtlebot3/turtlebot_mmrs/models:/usr/share/gazebo-11/models/
     volumes:
       - ./docker/turtlebot3:/home/ros/turtlebot3
+      - /home/michalt/Desktop/mmrs_central_control:/home/ros/mmrs_cc
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
     devices:
       - /dev/dri:/dev/dri
